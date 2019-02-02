@@ -1,0 +1,51 @@
+#' Count overall amount of missing values
+#' 
+#' This function counts the amount of missing values in a data set.
+#' 
+#' @param data A data frame.
+#' @param percent A logical value indicating whether to compute also the percentage (defaults to TRUE).
+#' 
+#' @return A tibble displaying the number and (if \code{percent = TRUE}) percent of missings in the data frame.
+#' @examples
+#' d <- mtcars
+#' d[4,3] <- NA # Create missing to illustrate function
+#' 
+#' count_na(d, percent = FALSE)
+#' count_na(d)
+#' @import dplyr and magrittr
+#' @export
+count_na <- function(data, percent = TRUE) {
+  
+  # dependencies
+  library(dplyr)
+  library(magrittr)
+  
+  # number of missings
+  n <- d %>%
+    is.na %>%
+    table %>%
+    as.tibble
+  
+  # percent of missings
+  perc <- d %>%
+    is.na %>%
+    table %>%
+    prop.table %>%
+    as.tibble %>%
+    mutate(percent = n*100) %>%
+    select(".", percent)
+  
+  if (percent != TRUE) {
+    temp <- n %>%
+      set_colnames(c("missings", "n"))
+    return(temp)
+  } else {
+    temp <- left_join(n, perc) %>%
+      set_colnames(c("missings", "n", "percent"))
+    return(temp)
+  }
+}
+
+
+
+
