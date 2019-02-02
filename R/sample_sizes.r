@@ -4,8 +4,12 @@
 #' 
 #' @param ... Several numeric values representing sample sizes.
 #' @param sample Names for the rows in the final table
-#' @return An object of class \code{tibble} that can be passed to \code{apa_table()}. It contains all simple sizes that were provided as individual numeric values. 
+#' @return An object of class \code{tibble} that can be passed to \code{apa_table()}. It contains all sample sizes that were provided as individual numeric values. 
 #' @examples
+#' # Simple example
+#' sample_sizes(100, 80, 10)
+#' 
+#' # Realistic example
 #' d <- mtcars
 #' d1 <- d[1:28,]
 #' d2 <- d1[1:20,]

@@ -12,7 +12,6 @@
 #' 
 #' count_na(d, percent = FALSE)
 #' count_na(d)
-#' @import dplyr and magrittr
 #' @export
 count_na <- function(data, percent = TRUE) {
   
