@@ -4,6 +4,8 @@
 #' 
 #' @param data A data frame.
 #' @param colors Colors to be used in the plot. 
+#' @param labels Both plots can be named individually.
+#' @param var_labels A logical value indicating whether variable names should be plotted (if many variables are in the data frame, setting this to TRUE can be messy).
 #' @param frequency A logical value indicating whether the frequency of the missingness pattens should be plotted to
 #' @param ratio Vector specifying the size of both plots in comparison to one another.
 #' @param nrow Underneath or next to each other?
@@ -16,8 +18,10 @@
 #' @export
 missing_pattern_plot <- function(data,
                                  colors = c("#2F6FAF", "lightblue"),
+                                 labels = c("A", "B"),
+                                 var_labels = FALSE,
                                  frequency = TRUE,
-                                 ratio = c(2.5,1),#
+                                 ratio = c(2.5,1),
                                  nrow = 1){
   
   # dependencies
@@ -30,20 +34,23 @@ missing_pattern_plot <- function(data,
   temp <- data %>% 
     md.pattern %>% 
     as.data.frame %>%
-    rownames_to_column("sum") %>%
-    select(-V3) %>% 
+    rownames_to_column("sum") %>% 
+    select(-ncol(.)) %>%
     as.tibble %>%
     subset(sum != "") %>%
     mutate(sum = as.numeric(sum)) %>%
-    mutate(n = 1:nrow(.))
+    mutate(n = 1:nrow(.)) %>%
+    mutate(n = factor(n, levels = n[order(-sum)]))
   
    main_plot <- temp %>%
     gather(key, value, -n, -sum) %>%
-    ggplot(aes(x = key, 
+    ggplot(.,
+           aes(x = key, 
                y = n)) +
-    geom_raster(aes(fill = factor(value, 
-                                  labels = c("TRUE", 
-                                             "FALSE")))) +
+    geom_tile(aes(fill = factor(value, 
+                                labels = c("TRUE", 
+                                           "FALSE"))),
+                color = "white") +
     scale_fill_manual(values = colors) +
     theme_minimal() +
     labs(x = "Variables",
@@ -52,7 +59,15 @@ missing_pattern_plot <- function(data,
     theme(legend.position="right",
           panel.grid.major = element_blank(), 
           panel.grid.minor = element_blank(),
-          axis.text.x = element_text(angle = 90, hjust = 1))
+          axis.text.x = element_text(angle = 90, hjust = 1),
+          axis.text.y = element_blank(),
+          axis.ticks.y = element_blank())
+   
+   if (!isTRUE(var_labels)) {
+     main_plot <- main_plot +
+       theme(axis.text.x = element_blank(),
+             axis.ticks.x = element_blank())
+   }
    
    if (!isTRUE(frequency)) {
      
@@ -77,9 +92,11 @@ missing_pattern_plot <- function(data,
           axis.ticks.y = element_blank()) +
     labs(y = "N. of cases")
    
-   grid.arrange(main_plot, 
-                side_plot,
-                widths = ratio,
-                nrow = nrow)
+   plot_grid(main_plot, side_plot, 
+             labels = labels, 
+             rel_widths = ratio, 
+             align = "h", 
+             nrow = nrow)
    }
 }
+

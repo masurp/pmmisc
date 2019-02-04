@@ -5,12 +5,17 @@
 \title{Plotting missingness patterns}
 \usage{
 missing_pattern_plot(data, colors = c("#2F6FAF", "lightblue"),
-  frequency = TRUE, ratio = c(2.5, 1), nrow = 1)
+  labels = c("A", "B"), var_labels = FALSE, frequency = TRUE,
+  ratio = c(2.5, 1), nrow = 1)
 }
 \arguments{
 \item{data}{A data frame.}
 
 \item{colors}{Colors to be used in the plot.}
+
+\item{labels}{Both plots can be named individually.}
+
+\item{var_labels}{A logical value indicating whether variable names should be plotted (if many variables are in the data frame, setting this to TRUE can be messy).}
 
 \item{frequency}{A logical value indicating whether the frequency of the missingness pattens should be plotted to}
 
