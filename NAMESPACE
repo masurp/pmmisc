@@ -2,5 +2,6 @@
 
 export(count_na)
 export(hist_var_plot)
+export(render_report)
 export(sample_sizes)
 export(save_n)
