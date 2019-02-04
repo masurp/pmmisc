@@ -2,6 +2,7 @@
 
 export(count_na)
 export(hist_var_plot)
+export(missing_pattern_plot)
 export(render_report)
 export(sample_sizes)
 export(save_n)

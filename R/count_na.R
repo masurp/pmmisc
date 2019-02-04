@@ -20,13 +20,13 @@ count_na <- function(data, percent = TRUE) {
   library(magrittr)
   
   # number of missings
-  n <- d %>%
+  n <- data %>%
     is.na %>%
     table %>%
     as.tibble
   
   # percent of missings
-  perc <- d %>%
+  perc <- data %>%
     is.na %>%
     table %>%
     prop.table %>%
