@@ -26,52 +26,77 @@ hist_var_plot <- function(data,
   library(tidyr)
   library(ggplot2)
   
-  # transform data
-  data_long <- data %>% 
-    gather(key, value)
-  
-  # plot data 
-  if (density == FALSE) {
+  if (class(data) == "data.frame") {
     
-    plot<- ggplot(data_long,
-                         aes(x = value)) + 
-      geom_histogram(bins = bins,
-                     fill = fill,
-                     color = color) +
-      facet_wrap(~key) +
-      labs(x = "Value",
-           y = "Density")
+    # transform data
+    data_long <- data %>% 
+      gather(key, value)
     
-    return(plot)
+    # plot data 
+    if (density == FALSE) {
+      
+      plot<- ggplot(data_long,
+                    aes(x = value)) + 
+        geom_histogram(bins = bins,
+                       fill = fill,
+                       color = color) +
+        facet_wrap(~key) +
+        labs(x = "Value",
+             y = "Density")
+      
+      return(plot)
+      
+    } else {
+      
+      plot <- ggplot(data_long, 
+                     aes(x = value)) + 
+        geom_histogram(aes(y = stat(density)), 
+                       bins = bins,
+                       fill = fill,
+                       color = color) +
+        stat_function(fun = dnorm, 
+                      args = list(mean = mean(data_long$value),
+                                  sd = sd(data_long$value)), 
+                      lwd = .5, 
+                      col = "black") +
+        facet_wrap(~key) +
+        labs(x = "Value",
+             y = "Density")
+      
+      return(plot)
+    }
     
   } else {
     
-    plot <- ggplot(data_long, 
-                   aes(x = value)) + 
-      geom_histogram(aes(y = stat(density)), 
-                     bins = bins,
-                     fill = fill,
-                     color = color) +
-      stat_function(fun = dnorm, 
-                    args = list(mean = mean(data_long$value),
-                                sd = sd(data_long$value)), 
-                    lwd = .5, 
-                    col = "black") +
-      facet_wrap(~key) +
-      labs(x = "Value",
-           y = "Density")
-    
-    return(plot)
-    
+    if (density == FALSE) {
+      
+      plot<- ggplot(NULL,
+                    aes(x = data)) + 
+        geom_histogram(bins = bins,
+                       fill = fill,
+                       color = color) +
+        labs(x = "Value",
+             y = "Density")
+      
+      return(plot)
+      
+    } else {
+      
+      plot <- ggplot(NULL, 
+                     aes(x = data)) + 
+        geom_histogram(aes(y = stat(density)), 
+                       bins = bins,
+                       fill = fill,
+                       color = color) +
+        stat_function(fun = dnorm, 
+                      args = list(mean = mean(data),
+                                  sd = sd(data)), 
+                      lwd = .5, 
+                      col = "black") +
+        labs(x = "Value",
+             y = "Density")
+      
+      return(plot)
+    }
   }
 }
-
-d <- data.frame(x = rnorm(100, 3, 1),
-                y = rnorm(100, 3, 1))
-
-hist_var_plot(d, density = F)
-
-d %>% gather(key, value) %>%
-  ggplot(aes(x = value)) +
-  geom_histogram(bins = 5) +
-  facet_wrap(~key)
