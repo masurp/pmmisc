@@ -6,9 +6,10 @@ This package includes some custom-made functions to facilitate some common data 
 
 Most functions require the following packages:
   
-  - For data wrangling procedure: `tidyverse` and `magrittr`
+- For data wrangling procedure: `tidyverse` and `magrittr`
 - For printing and typesetting: `papaja`
-- For SEM procedures: `lavaan` and `semTools`
+- For descriptive analyses: `psych`
+- For some plots: `gridExtra`
 
 These packages should be installed prior to using this package. 
 
