@@ -26,45 +26,45 @@ hist_var_plot <- function(data,
   library(tidyr)
   library(ggplot2)
   
-  if (class(data) == "data.frame") {
+  if (class(data) != "integer" | class(data) != "numeric" ) {
     
-    # transform data
-    data_long <- data %>% 
-      gather(key, value)
+  # transform data
+  data_long <- data %>% 
+    gather(key, value)
+  
+  # plot data 
+  if (density == FALSE) {
     
-    # plot data 
-    if (density == FALSE) {
-      
-      plot<- ggplot(data_long,
-                    aes(x = value)) + 
-        geom_histogram(bins = bins,
-                       fill = fill,
-                       color = color) +
-        facet_wrap(~key) +
-        labs(x = "Value",
-             y = "Density")
-      
-      return(plot)
-      
-    } else {
-      
-      plot <- ggplot(data_long, 
-                     aes(x = value)) + 
-        geom_histogram(aes(y = stat(density)), 
-                       bins = bins,
-                       fill = fill,
-                       color = color) +
-        stat_function(fun = dnorm, 
-                      args = list(mean = mean(data_long$value),
-                                  sd = sd(data_long$value)), 
-                      lwd = .5, 
-                      col = "black") +
-        facet_wrap(~key) +
-        labs(x = "Value",
-             y = "Density")
-      
-      return(plot)
-    }
+    plot<- ggplot(data_long,
+                         aes(x = value)) + 
+      geom_histogram(bins = bins,
+                     fill = fill,
+                     color = color) +
+      facet_wrap(~key) +
+      labs(x = "Value",
+           y = "Density")
+    
+    return(plot)
+    
+  } else {
+    
+    plot <- ggplot(data_long, 
+                   aes(x = value)) + 
+      geom_histogram(aes(y = stat(density)), 
+                     bins = bins,
+                     fill = fill,
+                     color = color) +
+      stat_function(fun = dnorm, 
+                    args = list(mean = mean(data_long$value),
+                                sd = sd(data_long$value)), 
+                    lwd = .5, 
+                    col = "black") +
+      facet_wrap(~key) +
+      labs(x = "Value",
+           y = "Density")
+    
+    return(plot)
+  }
     
   } else {
     
@@ -97,6 +97,6 @@ hist_var_plot <- function(data,
              y = "Density")
       
       return(plot)
-    }
   }
+ }
 }
