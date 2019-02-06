@@ -2,18 +2,23 @@
 #' 
 #' This functions computes a facetted plot of variable distributions. Using the density function, the first layer is a histogram and the second a normal distributed density curve based on the mean and standard deviation of the respective variable.  
 #' 
-#' @param data A data frame including all variables that should be plotted. 
-#' @param bins Number of values that should be plotted on the x-axis (should equal the number of answer options)
-#' @param fill Color of the bins. 
-#' @param color Color of the bin margins.
-#' @param density A logical value indicating whether a normally distributed density curve should be plotted on top of the histogram. The density curve takes the mean and sd of the respective variable as arguments. In this case, the histograms are computed using \code{aes(y = stat(density)}. 
-#' @return An object of class \code{tibble} that can be passed to \code{apa_table()}. It contains all sample sizes that were provided as individual numeric values. 
+#' @param data An object of one of the following classes: "numeric", "double", "integer", "data.frame", "tbl", or "tbl_df".
+#' @param bins Number of values that should be plotted on the x-axis (should equal the number of answer options or a reasonable scale).
+#' @param fill Color of the bins (defaults to green). 
+#' @param color Color of the bin margins (defaults to white).
+#' @param density A logical value indicating whether a normally distributed density curve should be plotted on top of the histogram. The density curve takes the mean and sd of the respective variables as arguments. In this case, the histograms are computed using \code{aes(y = stat(density)}. 
+#' @return A A \code{\link[ggplot2]{ggplot}} object that can be further customized using standard ggplot2 elements.
 #' @examples
 #' d <- data.frame(x = rnorm(100, 3, 1),
-#'y = rnorm(100, 3, 1))
+#'                 y = rnorm(100, 3, 1))
 #'
+#'# Several variables
 #'hist_var_plot(d, density = F)
 #'hist_var_plot(d)
+#'
+#'# One variables
+#'hist_var_plot(d$mpg)
+#'
 #' @export
 hist_var_plot <- function(data, 
                           bins = 5, 
@@ -26,51 +31,20 @@ hist_var_plot <- function(data,
   library(tidyr)
   library(ggplot2)
   
-  if (class(data) != "integer" | class(data) != "numeric" ) {
-    
-  # transform data
-  data_long <- data %>% 
-    gather(key, value)
+  # get class
+  class_data <- class(data)
+  if (length(class_data) != 1) {
+    class_data <- class_data[1]
+    }
   
-  # plot data 
-  if (density == FALSE) {
+  ### If data is a single numeric variable
+  if (class_data == "integer" | class_data == "double" | class_data == "numeric") {
     
-    plot<- ggplot(data_long,
-                         aes(x = value)) + 
-      geom_histogram(bins = bins,
-                     fill = fill,
-                     color = color) +
-      facet_wrap(~key) +
-      labs(x = "Value",
-           y = "Density")
-    
-    return(plot)
-    
-  } else {
-    
-    plot <- ggplot(data_long, 
-                   aes(x = value)) + 
-      geom_histogram(aes(y = stat(density)), 
-                     bins = bins,
-                     fill = fill,
-                     color = color) +
-      stat_function(fun = dnorm, 
-                    args = list(mean = mean(data_long$value),
-                                sd = sd(data_long$value)), 
-                    lwd = .5, 
-                    col = "black") +
-      facet_wrap(~key) +
-      labs(x = "Value",
-           y = "Density")
-    
-    return(plot)
-  }
-    
-  } else {
     
     if (density == FALSE) {
       
-      plot<- ggplot(NULL,
+      # only histogram
+      plot <- ggplot(NULL,
                     aes(x = data)) + 
         geom_histogram(bins = bins,
                        fill = fill,
@@ -82,6 +56,7 @@ hist_var_plot <- function(data,
       
     } else {
       
+      # histogram with normal distribution density curve
       plot <- ggplot(NULL, 
                      aes(x = data)) + 
         geom_histogram(aes(y = stat(density)), 
@@ -97,6 +72,57 @@ hist_var_plot <- function(data,
              y = "Density")
       
       return(plot)
-  }
+    } 
+  
+    ## Plotting a data frame with several numeric variables
+  } else if (class_data == "data.frame" | class_data == "tbl_df" | class_data == "tbl") {
+
+      
+      # step 1: ransform data
+      data_long <- data %>% 
+        gather(key, value)
+      
+      # step 2: plot long data
+      
+      if (density == FALSE) {
+        
+        # Only histogram
+        plot <- ggplot(data_long,
+                       aes(x = value)) + 
+          geom_histogram(bins = bins,
+                         fill = fill,
+                         color = color) +
+          facet_wrap(~key) +
+          labs(x = "Value",
+               y = "Density")
+        
+        return(plot)
+        
+      } else {
+        
+        # histogram with normal distribution density curve
+        plot <- ggplot(data_long, 
+                       aes(x = value)) + 
+          geom_histogram(aes(y = stat(density)), 
+                         bins = bins,
+                         fill = fill,
+                         color = color) +
+          stat_function(fun = dnorm, 
+                        args = list(mean = mean(data_long$value),
+                                    sd = sd(data_long$value)), 
+                        lwd = .5, 
+                        col = "black") +
+          facet_wrap(~key) +
+          labs(x = "Value",
+               y = "Density")
+        
+        return(plot)
+      }
+      
+     
+    } else {
+    
+    message("You need to provide a data.frame or a numeric vector to run this function!")
+    
  }
 }

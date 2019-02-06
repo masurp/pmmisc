@@ -8,26 +8,31 @@ hist_var_plot(data, bins = 5, fill = "#5e999b", color = "white",
   density = TRUE)
 }
 \arguments{
-\item{data}{A data frame including all variables that should be plotted.}
+\item{data}{An object of one of the following classes: "numeric", "double", "integer", "data.frame", "tbl", or "tbl_df".}
 
-\item{bins}{Number of values that should be plotted on the x-axis (should equal the number of answer options)}
+\item{bins}{Number of values that should be plotted on the x-axis (should equal the number of answer options or a reasonable scale).}
 
-\item{fill}{Color of the bins.}
+\item{fill}{Color of the bins (defaults to green).}
 
-\item{color}{Color of the bin margins.}
+\item{color}{Color of the bin margins (defaults to white).}
 
-\item{density}{A logical value indicating whether a normally distributed density curve should be plotted on top of the histogram. The density curve takes the mean and sd of the respective variable as arguments. In this case, the histograms are computed using \code{aes(y = stat(density)}.}
+\item{density}{A logical value indicating whether a normally distributed density curve should be plotted on top of the histogram. The density curve takes the mean and sd of the respective variables as arguments. In this case, the histograms are computed using \code{aes(y = stat(density)}.}
 }
 \value{
-An object of class \code{tibble} that can be passed to \code{apa_table()}. It contains all sample sizes that were provided as individual numeric values.
+A A \code{\link[ggplot2]{ggplot}} object that can be further customized using standard ggplot2 elements.
 }
 \description{
 This functions computes a facetted plot of variable distributions. Using the density function, the first layer is a histogram and the second a normal distributed density curve based on the mean and standard deviation of the respective variable.
 }
 \examples{
 d <- data.frame(x = rnorm(100, 3, 1),
-y = rnorm(100, 3, 1))
+                y = rnorm(100, 3, 1))
 
+# Several variables
 hist_var_plot(d, density = F)
 hist_var_plot(d)
+
+# One variables
+hist_var_plot(d$mpg)
+
 }
