@@ -18,7 +18,6 @@
 #'
 #'# One variables
 #'hist_var_plot(d$x)
-#'
 #' @export
 hist_var_plot <- function(data, 
                           bins = 5, 
