@@ -34,4 +34,7 @@ d <- mtcars
 d[4,3] <- NA # Create missing to illustrate function
 
 missing_pattern_plot(d)
+
+# Add variable names and plot only patterns
+missing_pattern_plot(d, var_labels = T, frequency = F)
 }

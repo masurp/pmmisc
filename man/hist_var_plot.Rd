@@ -34,5 +34,4 @@ hist_var_plot(d)
 
 # One variables
 hist_var_plot(d$x)
-
 }

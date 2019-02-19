@@ -5,6 +5,7 @@
 #' @param x A numeric or factor variable.
 #' @param name A name for the first colum (if not specified, it remains the variable code).
 #' @param labels If you are evaluating a single vector, you specify the variable name here.
+#' @param col_sum Do you want another row with column sums?
 #' @examples 
 #' x <- rep(c("female", "male"), 100)
 #' 
@@ -12,7 +13,8 @@
 #' @export
 describe_factor <- function(x,
                             name = NULL,
-                            labels = NULL){
+                            labels = NULL,
+                            col_sum = TRUE){
   # dependencies
   library(tidyverse)
   library(magrittr)
@@ -45,6 +47,14 @@ describe_factor <- function(x,
     temp <- temp %>%
       set_colnames(., c(name, "n", "percent"))
   }
-    
+  
+  if (isTRUE(col_sum)) {
+    temp <- temp %>% 
+      bind_rows(temp %>% 
+                  summarize(n = sum(n),
+                            percent = sum(percent)) %>%
+                  mutate(gender = "sum") %>%
+                  select(gender, n, percent))
+  }
   return(temp)
 }

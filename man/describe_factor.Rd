@@ -4,7 +4,7 @@
 \alias{describe_factor}
 \title{Computes a frequency table for factor variables}
 \usage{
-describe_factor(x, name = NULL, labels = NULL)
+describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE)
 }
 \arguments{
 \item{x}{A numeric or factor variable.}
@@ -12,6 +12,8 @@ describe_factor(x, name = NULL, labels = NULL)
 \item{name}{A name for the first colum (if not specified, it remains the variable code).}
 
 \item{labels}{If you are evaluating a single vector, you specify the variable name here.}
+
+\item{col_sum}{Do you want another row with column sums?}
 }
 \description{
 This function takes a factor variable (numeric variables are transformed into a factor variable) and computes basic frequency table.
