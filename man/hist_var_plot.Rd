@@ -33,6 +33,6 @@ hist_var_plot(d, density = F)
 hist_var_plot(d)
 
 # One variables
-hist_var_plot(d$mpg)
+hist_var_plot(d$x)
 
 }
