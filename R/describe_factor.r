@@ -43,18 +43,19 @@ describe_factor <- function(x,
     temp <- left_join(temp, n) %>%
       select(x, n, percent)
   
-  if (!is.null(name)) {
-    temp <- temp %>%
-      set_colnames(., c(name, "n", "percent"))
-  }
-  
   if (isTRUE(col_sum)) {
     temp <- temp %>% 
       bind_rows(temp %>% 
                   summarize(n = sum(n),
                             percent = sum(percent)) %>%
-                  mutate(gender = "sum") %>%
-                  select(gender, n, percent))
+                  mutate(x = "sum") %>%
+                  select(x, n, percent))
   }
+  
+  if (!is.null(name)) {
+    temp <- temp %>%
+      set_colnames(., c(name, "n", "percent"))
+  }
+    
   return(temp)
 }
