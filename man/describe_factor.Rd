@@ -11,9 +11,9 @@ describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE)
 
 \item{name}{A name for the first colum (if not specified, it remains the variable code).}
 
-\item{labels}{If you are evaluating a single vector, you specify the variable name here.}
+\item{labels}{If you are evaluating a numeric vector, the function will transform it into a factor variable. You can specify custom labels for the factor levels here.}
 
-\item{col_sum}{Do you want another row with column sums?}
+\item{col_sum}{Do you want column sums?}
 }
 \description{
 This function takes a factor variable (numeric variables are transformed into a factor variable) and computes basic frequency table.

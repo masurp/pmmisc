@@ -4,8 +4,8 @@
 #' 
 #' @param x A numeric or factor variable.
 #' @param name A name for the first colum (if not specified, it remains the variable code).
-#' @param labels If you are evaluating a single vector, you specify the variable name here.
-#' @param col_sum Do you want another row with column sums?
+#' @param labels If you are evaluating a numeric vector, the function will transform it into a factor variable. You can specify custom labels for the factor levels here.
+#' @param col_sum Do you want column sums?
 #' @examples 
 #' x <- rep(c("female", "male"), 100)
 #' 
