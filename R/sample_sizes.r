@@ -1,10 +1,10 @@
 #' Creates table with sample sizes and attrition rates
 #' 
-#' This functions binds individual numeric values (representing sample sizes) in a printable table. It is a follow-up function for \code{save_n} which extracts the number of cases in a data frame.  
+#' This functions binds individual numeric values (representing sample sizes) in a printable table. It is a follow-up function for \code{save_n} which extracts the number of cases in a data frame.
 #' 
-#' @param ... Several numeric values representing sample sizes.
-#' @param sample Names for the rows in the final table
-#' @return An object of class \code{tibble} that can be passed to \code{apa_table()}. It contains all sample sizes that were provided as individual numeric values. 
+#' @param ... Several numeric values representing sample sizes (e.g., obtained by using \code{save_n()}
+#' @param sample Names for the rows in the final table.
+#' @return An object of class \code{tibble} that can be passed to \code{apa_table()}. It contains all sample sizes that were provided as individual numeric values.
 #' @examples
 #' # Simple example
 #' sample_sizes(100, 80, 10)
@@ -37,6 +37,4 @@ sample_sizes <- function(...,
            percent = (n/unlist(list(...))[[1]])*100)
   return(temp)
 }
-
-unlist(1,2,3)
 
