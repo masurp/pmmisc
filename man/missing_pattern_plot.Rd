@@ -21,7 +21,7 @@ missing_pattern_plot(data, colors = c("#2F6FAF", "lightblue"),
 
 \item{ratio}{Vector specifying the size of both plots in comparison to one another.}
 
-\item{nrow}{Underneath or next to each other?}
+\item{nrow}{Should the plots be printed underneath or next to each other? Defaults to "next to each other".}
 }
 \value{
 A gtable.

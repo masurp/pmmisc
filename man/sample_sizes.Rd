@@ -8,9 +8,9 @@ sample_sizes(..., sample = c("Overall clicks", "Eligible cases",
   "Complete cases"))
 }
 \arguments{
-\item{...}{Several numeric values representing sample sizes.}
+\item{...}{Several numeric values representing sample sizes (e.g., obtained by using \code{save_n()}}
 
-\item{sample}{Names for the rows in the final table}
+\item{sample}{Names for the rows in the final table.}
 }
 \value{
 An object of class \code{tibble} that can be passed to \code{apa_table()}. It contains all sample sizes that were provided as individual numeric values.

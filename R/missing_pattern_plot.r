@@ -8,8 +8,8 @@
 #' @param var_labels A logical value indicating whether variable names should be plotted (if many variables are in the data frame, setting this to TRUE can be messy).
 #' @param frequency A logical value indicating whether the frequency of the missingness pattens should be plotted to
 #' @param ratio Vector specifying the size of both plots in comparison to one another.
-#' @param nrow Underneath or next to each other?
-#' @return A gtable. 
+#' @param nrow Should the plots be printed underneath or next to each other? Defaults to "next to each other".
+#' @return A gtable.
 #' @examples
 #' d <- mtcars
 #' d[4,3] <- NA # Create missing to illustrate function
@@ -31,6 +31,11 @@ missing_pattern_plot <- function(data,
   library(mice)
   library(tidyverse)
   library(gridExtra)
+  
+  # Break message
+  if (is.null(data)) {
+    message("You need to provide a data frame!")
+  }
   
   color_2 <- colors[2]
   
