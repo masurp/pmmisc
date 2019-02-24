@@ -5,9 +5,9 @@
 #' @param data An object of one of the following classes: "numeric", "double", "integer", "data.frame", "tbl", or "tbl_df".
 #' @param bins Number of values that should be plotted on the x-axis (should equal the number of answer options or a reasonable scale).
 #' @param fill Color of the bins (defaults to green). 
-#' @param color Color of the bin margins (defaults to white).
+#' @param color Color of the bin borders (defaults to white).
 #' @param density A logical value indicating whether a normally distributed density curve should be plotted on top of the histogram. The density curve takes the mean and sd of the respective variables as arguments. In this case, the histograms are computed using \code{aes(y = stat(density)}. 
-#' @return A A \code{\link[ggplot2]{ggplot}} object that can be further customized using standard ggplot2 elements.
+#' @return A \code{\link[ggplot2]{ggplot}} object that can be further customized using standard ggplot2 elements.
 #' @examples
 #' d <- data.frame(x = rnorm(100, 3, 1),
 #'                 y = rnorm(100, 3, 1))

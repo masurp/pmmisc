@@ -1,14 +1,14 @@
 #' Count overall amount of missing values
 #' 
-#' This function counts the amount of missing values in a data set.
+#' This function counts the overall amount of missing values in a data set and returns a printable table. 
 #' 
 #' @param data A data frame.
 #' @param percent A logical value indicating whether to compute also the percentage (defaults to TRUE).
 #' 
-#' @return A tibble displaying the number and (if \code{percent = TRUE}) percent of missings in the data frame.
+#' @return A tibble..
 #' @examples
 #' d <- mtcars
-#' d[4,3] <- NA # Create missing to illustrate function
+#' d[4,3] <- NA # Create missing values to illustrate function
 #' 
 #' count_na(d, percent = FALSE)
 #' count_na(d)
@@ -37,11 +37,15 @@ count_na <- function(data, percent = TRUE) {
   if (percent != TRUE) {
     temp <- n %>%
       set_colnames(c("missings", "n"))
+    
     return(temp)
+    
   } else {
     temp <- left_join(n, perc) %>%
       set_colnames(c("missings", "n", "percent"))
+    
     return(temp)
+    
   }
 }
 

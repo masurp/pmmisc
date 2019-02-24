@@ -1,6 +1,6 @@
 #' Creates table with sample sizes and attrition rates
 #' 
-#' This functions binds individual numeric values (representing sample sizes) in a printable table. It is a follow-up function for \code{save_n} which extracts the number of cases in a data frame.
+#' This functions binds individual numeric values (representing sample sizes) into a printable table. It is a follow-up function for \code{save_n} which extracts the number of cases in a data frame.
 #' 
 #' @param ... Several numeric values representing sample sizes (e.g., obtained by using \code{save_n()}
 #' @param sample Names for the rows in the final table.

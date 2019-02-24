@@ -16,8 +16,11 @@ describe_vars(data, items = NULL, var_name = NULL, brief = FALSE,
 
 \item{brief}{A logical value indicating wether all psychometrics or only the mean and the standard deviations should be printed}
 }
+\value{
+A tibble.
+}
 \description{
-This function is essentially similar to the function \code{describe()} in the package \code{psych} (it even uses that function), but provides some additional benefits: First, it transforms the the output into a tibble, second, it reduces number of psychometrics  to the most important ones, and it allows to include item formulation drawn from an additional data frame (needs to have a variable "code" that includes similar variable codes as the original data frame and a variable named "item" that includes the item formulations).
+This function is essentially a customized version of the function \code{describe()} included the package \code{psych}, but provides some additional benefits: First, it transforms the the output into a tibble. Second, it reduces the number of psychometrics down to the most important ones. Third, it allows to include item formulations drawn from an additional data frame (needs to have a variable "code" that includes similar variable codes as the original data frame and a variable named "item" that includes the item formulations). Overall, it provides enough functionality to create a printable "Table 1".
 }
 \examples{
 d <- mtcars

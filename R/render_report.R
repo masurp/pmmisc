@@ -6,11 +6,10 @@
 #' 
 #' @param file path to the file that should be rendered. File needs to be an RMarkdown script. 
 #' @param name name of the final report.
-#' @export
-#' 
 #' @examples 
 #' # Produces an html-file called "01_analysis.html"
 #' render_report("test.rmd", "01_analysis")
+#' @export
 render_report = function(file, name) {
   rmarkdown::render(
     file, params = list(

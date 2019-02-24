@@ -1,11 +1,12 @@
 #' Computes a frequency table for factor variables
 #' 
-#' This function takes a factor variable (numeric variables are transformed into a factor variable) and computes basic frequency table.
+#' This function takes a factor variable (numeric variables are transformed into a factor variable) and computes a basic frequency table. 
 #' 
 #' @param x A numeric or factor variable.
 #' @param name A name for the first colum (if not specified, it remains the variable code).
 #' @param labels If you are evaluating a numeric vector, the function will transform it into a factor variable. You can specify custom labels for the factor levels here.
 #' @param col_sum Do you want column sums?
+#' @return A tibble. 
 #' @examples 
 #' x <- rep(c("female", "male"), 100)
 #' 

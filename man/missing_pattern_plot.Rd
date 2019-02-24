@@ -2,22 +2,22 @@
 % Please edit documentation in R/missing_pattern_plot.r
 \name{missing_pattern_plot}
 \alias{missing_pattern_plot}
-\title{Plotting missingness patterns}
+\title{Missingness pattern plot}
 \usage{
 missing_pattern_plot(data, colors = c("#2F6FAF", "lightblue"),
   labels = c("A", "B"), var_labels = FALSE, frequency = TRUE,
   ratio = c(2.5, 1), nrow = 1)
 }
 \arguments{
-\item{data}{A data frame.}
+\item{data}{The data frame that should be evaluated.}
 
 \item{colors}{Colors to be used in the plot.}
 
-\item{labels}{Both plots can be named individually.}
+\item{labels}{Both plots can be named individually. By default, they are simply labelled "A" and "B".}
 
 \item{var_labels}{A logical value indicating whether variable names should be plotted (if many variables are in the data frame, setting this to TRUE can be messy).}
 
-\item{frequency}{A logical value indicating whether the frequency of the missingness pattens should be plotted to}
+\item{frequency}{A logical value indicating whether the frequency of the missingness pattens should be plotted to.}
 
 \item{ratio}{Vector specifying the size of both plots in comparison to one another.}
 
@@ -27,7 +27,7 @@ missing_pattern_plot(data, colors = c("#2F6FAF", "lightblue"),
 A gtable.
 }
 \description{
-This function plots the missingness patterns and if wanted also their their frequencies.
+This function plots the missingness patterns and (if desired) also their their frequencies in the data frame.
 }
 \examples{
 d <- mtcars

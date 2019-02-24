@@ -15,8 +15,11 @@ describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE)
 
 \item{col_sum}{Do you want column sums?}
 }
+\value{
+A tibble.
+}
 \description{
-This function takes a factor variable (numeric variables are transformed into a factor variable) and computes basic frequency table.
+This function takes a factor variable (numeric variables are transformed into a factor variable) and computes a basic frequency table.
 }
 \examples{
 x <- rep(c("female", "male"), 100)

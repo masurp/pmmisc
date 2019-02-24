@@ -16,7 +16,7 @@ sample_sizes(..., sample = c("Overall clicks", "Eligible cases",
 An object of class \code{tibble} that can be passed to \code{apa_table()}. It contains all sample sizes that were provided as individual numeric values.
 }
 \description{
-This functions binds individual numeric values (representing sample sizes) in a printable table. It is a follow-up function for \code{save_n} which extracts the number of cases in a data frame.
+This functions binds individual numeric values (representing sample sizes) into a printable table. It is a follow-up function for \code{save_n} which extracts the number of cases in a data frame.
 }
 \examples{
 # Simple example

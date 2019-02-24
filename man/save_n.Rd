@@ -13,7 +13,7 @@ save_n(data)
 A numeric value.
 }
 \description{
-Just a convenient function to save the number of cases of a data frame. This function primarily serves to provide values for the wrapper \code{sample_sizes()} in this package.
+Simply a convenient function to save the number of cases of a data frame. This function primarily serves to provide values for the wrapper \code{sample_sizes()} in this package.
 }
 \examples{
 d <- mtcars

@@ -14,12 +14,12 @@ hist_var_plot(data, bins = 5, fill = "#5e999b", color = "white",
 
 \item{fill}{Color of the bins (defaults to green).}
 
-\item{color}{Color of the bin margins (defaults to white).}
+\item{color}{Color of the bin borders (defaults to white).}
 
 \item{density}{A logical value indicating whether a normally distributed density curve should be plotted on top of the histogram. The density curve takes the mean and sd of the respective variables as arguments. In this case, the histograms are computed using \code{aes(y = stat(density)}.}
 }
 \value{
-A A \code{\link[ggplot2]{ggplot}} object that can be further customized using standard ggplot2 elements.
+A \code{\link[ggplot2]{ggplot}} object that can be further customized using standard ggplot2 elements.
 }
 \description{
 This functions computes a facetted plot of variable distributions. Using the density function, the first layer is a histogram and the second a normal distributed density curve based on the mean and standard deviation of the respective variable.

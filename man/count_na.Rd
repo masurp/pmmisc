@@ -12,14 +12,14 @@ count_na(data, percent = TRUE)
 \item{percent}{A logical value indicating whether to compute also the percentage (defaults to TRUE).}
 }
 \value{
-A tibble displaying the number and (if \code{percent = TRUE}) percent of missings in the data frame.
+A tibble..
 }
 \description{
-This function counts the amount of missing values in a data set.
+This function counts the overall amount of missing values in a data set and returns a printable table.
 }
 \examples{
 d <- mtcars
-d[4,3] <- NA # Create missing to illustrate function
+d[4,3] <- NA # Create missing values to illustrate function
 
 count_na(d, percent = FALSE)
 count_na(d)

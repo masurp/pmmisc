@@ -1,12 +1,12 @@
-#' Plotting missingness patterns
+#' Missingness pattern plot
 #' 
-#' This function plots the missingness patterns and if wanted also their their frequencies.
+#' This function plots the missingness patterns and (if desired) also their their frequencies in the data frame.
 #' 
-#' @param data A data frame.
+#' @param data The data frame that should be evaluated.
 #' @param colors Colors to be used in the plot. 
-#' @param labels Both plots can be named individually.
+#' @param labels Both plots can be named individually. By default, they are simply labelled "A" and "B".
 #' @param var_labels A logical value indicating whether variable names should be plotted (if many variables are in the data frame, setting this to TRUE can be messy).
-#' @param frequency A logical value indicating whether the frequency of the missingness pattens should be plotted to
+#' @param frequency A logical value indicating whether the frequency of the missingness pattens should be plotted to.
 #' @param ratio Vector specifying the size of both plots in comparison to one another.
 #' @param nrow Should the plots be printed underneath or next to each other? Defaults to "next to each other".
 #' @return A gtable.
