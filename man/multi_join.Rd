@@ -7,13 +7,13 @@
 multi_join(...)
 }
 \arguments{
-\item{...}{Up to five data sets that should be joined.}
+\item{...}{Up to five data frames that should be joined.}
 }
 \value{
 A data frame.
 }
 \description{
-This function joins up to five data sets using the function \code{inner_join} from the package "dplyr". Each data set is individually joined with the previous one. This way, several data sets of which only pairs have the same id variable can be joined.
+This function joins up to five data sets using the function \code{inner_join} from the package "dplyr". Each data set is individually joined with the next one. This way, several data sets of which only pairs have the same id variable can be joined.
 }
 \examples{
 # Creating several data frames.
