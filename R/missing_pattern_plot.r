@@ -31,6 +31,7 @@ missing_pattern_plot <- function(data,
   library(mice)
   library(tidyverse)
   library(gridExtra)
+  library(cowplot)
   
   # Break message
   if (is.null(data)) {
