@@ -21,7 +21,7 @@ describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE, ...)
 A tibble.
 }
 \description{
-This function takes a factor variable (numeric variables are transformed into a factor variable) and computes a basic frequency table.
+This function takes a factor variable (numeric variables are transformed into a factor variable) and computes a basic frequency table. Column sums are added automatically, but can be removed if desired. By default, NAs will be removed before computation. Yet, arguments that are usally passed to the \code{table()} function can be added to also count NAs (useNA = "always").
 }
 \examples{
 # Standard example
