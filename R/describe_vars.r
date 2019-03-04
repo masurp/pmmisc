@@ -6,6 +6,8 @@
 #' @param items A data frame containing the variable codes and item formulations.
 #' @param var_name If you are evaluating a single vector, you specify the variable name here. 
 #' @param brief A logical value indicating wether all psychometrics or only the mean and the standard deviations should be printed
+#' @param first_col How should the first column be named? Defaults to "code.
+#' @param ... Further arguments that can be passed to \code{describe}.
 #' @return A tibble. 
 #' @examples 
 #' d <- mtcars
@@ -17,14 +19,15 @@ describe_vars <- function(data,
                           items = NULL, 
                           var_name = NULL, 
                           brief = FALSE, 
-                          first_col = "code") {
+                          first_col = "code",
+                          ...) {
   
   # dependencies
   library(psych)
   library(tidyverse)
   
   temp <- data %>%
-    describe %>%
+    describe(., ...) %>%
     as.data.frame %>%
     rownames_to_column(first_col) 
   
@@ -32,7 +35,9 @@ describe_vars <- function(data,
     temp <- temp %>%
       left_join(items) %>%
       select(first_col, item, mean, sd, min, max, skew, kurtosis, n)
+    
   } else {
+    
     temp <- temp %>%
       select(first_col, mean, sd, min, max, skew, kurtosis, n)
   }
