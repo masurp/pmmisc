@@ -6,16 +6,22 @@
 #' @param name A name for the first colum (if not specified, it remains the variable code).
 #' @param labels If you are evaluating a numeric vector, the function will transform it into a factor variable. You can specify custom labels for the factor levels here.
 #' @param col_sum Do you want column sums?
+#' @param ... Further arguments that can be passed to \code{table}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}
 #' @return A tibble. 
 #' @examples 
-#' x <- rep(c("female", "male"), 100)
+#' # Standard example
+#' d <- mtcars
+#' describe_factor(d$cyl, name = "No. of cylinders")
 #' 
-#' describe_factor(x, name = "gender")
+#' # Example with missing values
+#' d$cyl[3] <- NA # Creating a missing value
+#' describe_factor(d$cyl, name = "No. of cylinders", useNA = "always")
 #' @export
 describe_factor <- function(x,
                             name = NULL,
                             labels = NULL,
-                            col_sum = TRUE){
+                            col_sum = TRUE,
+                            ...){
   # dependencies
   library(tidyverse)
   library(magrittr)
@@ -29,12 +35,12 @@ describe_factor <- function(x,
   }
     
     n <- x %>%
-      table %>%
+      table(., ...) %>%
       as.tibble %>%
       rename(x = ".")
     
     temp <- x %>%
-      table %>%
+      table(., ...) %>%
       prop.table %>% 
       as.tibble %>%
       rename(x = ".") %>%
