@@ -42,7 +42,7 @@ describe_vars <- function(data,
       select(first_col, mean, sd, min, max, skew, kurtosis, n)
   }
   
-  if((class(data) == "integer" | class(data) == "numeric") & !is.null(var_name)){
+  if((is.element("integer", class(data)) | is.element("numeric", class(data))) & !is.null(var_name)){
     temp <- temp %>%
       mutate(variable = var_name) %>%
       select(variable, everything(), -first_col)
