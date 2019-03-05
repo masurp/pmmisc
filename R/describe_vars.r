@@ -10,8 +10,6 @@
 #' @param ... Further arguments that can be passed to \code{describe}.
 #' @return A tibble. 
 #' @examples 
-#' d <- mtcars
-#' 
 #' describe_vars(mtcars)
 #' describe_vars(mtcars$cyl, var_name = "cylinder")
 #' @export

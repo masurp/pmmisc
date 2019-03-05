@@ -27,8 +27,6 @@ A tibble.
 This function is essentially a customized version of the function \code{describe()} included the package \code{psych}, but provides some additional benefits: First, it transforms the the output into a tibble. Second, it reduces the number of psychometrics down to the most important ones. Third, it allows to include item formulations drawn from an additional data frame (needs to have a variable "code" that includes similar variable codes as the original data frame and a variable named "item" that includes the item formulations). Overall, it provides enough functionality to create a printable "Table 1".
 }
 \examples{
-d <- mtcars
-
 describe_vars(mtcars)
 describe_vars(mtcars$cyl, var_name = "cylinder")
 }
