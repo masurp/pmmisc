@@ -79,7 +79,9 @@ hist_var_plot <- function(data,
     } 
   
     ## Plotting a data frame with several numeric variables
-  } else if (is.element("data.frame", class_data)) {
+  } else if (is.element("data.frame", class_data) |
+             is.element("tbl_df", class_data) |
+             is.element("tbl", class_data)) {
 
       # step 1: ransform data
       data_long <- data %>% 
