@@ -10,13 +10,13 @@ describe_vars(data, items = NULL, var_name = NULL, brief = FALSE,
 \arguments{
 \item{data}{A data frame that includes that variables that should be evaluated. Can also be a vector with numeric values.}
 
-\item{items}{A data frame containing the variable codes and item formulations.}
+\item{items}{A data frame containing the variable codes (first column "code") and item formulations (second column "item").}
 
 \item{var_name}{If you are evaluating a single vector, you specify the variable name here.}
 
 \item{brief}{A logical value indicating wether all psychometrics or only the mean and the standard deviations should be printed}
 
-\item{first_col}{How should the first column be named? Defaults to "code.}
+\item{first_col}{How should the first column be named? Defaults to "code".}
 
 \item{...}{Further arguments that can be passed to \code{describe}.}
 }

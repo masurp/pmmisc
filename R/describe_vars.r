@@ -3,10 +3,10 @@
 #' This function is essentially a customized version of the function \code{describe()} included the package \code{psych}, but provides some additional benefits: First, it transforms the the output into a tibble. Second, it reduces the number of psychometrics down to the most important ones. Third, it allows to include item formulations drawn from an additional data frame (needs to have a variable "code" that includes similar variable codes as the original data frame and a variable named "item" that includes the item formulations). Overall, it provides enough functionality to create a printable "Table 1". 
 #' 
 #' @param data A data frame that includes that variables that should be evaluated. Can also be a vector with numeric values. 
-#' @param items A data frame containing the variable codes and item formulations.
+#' @param items A data frame containing the variable codes (first column "code") and item formulations (second column "item").
 #' @param var_name If you are evaluating a single vector, you specify the variable name here. 
 #' @param brief A logical value indicating wether all psychometrics or only the mean and the standard deviations should be printed
-#' @param first_col How should the first column be named? Defaults to "code.
+#' @param first_col How should the first column be named? Defaults to "code".
 #' @param ... Further arguments that can be passed to \code{describe}.
 #' @return A tibble. 
 #' @examples 
@@ -30,7 +30,7 @@ describe_vars <- function(data,
     rownames_to_column(first_col) 
   
   if (!is.null(items)) {
-    items[,1] <- as.character(items[,1])
+    items$code <- as.character(items$code)
     temp <- temp %>%
       left_join(items) %>%
       select(first_col, item, mean, sd, min, max, skew, kurtosis, n)
