@@ -7,12 +7,8 @@
 #' @param fill Color of the bins (defaults to green). 
 #' @param color Color of the bin borders (defaults to white).
 #' @param density A logical value indicating whether a normally distributed density curve should be plotted on top of the histogram. The density curve takes the mean and sd of the respective variables as arguments. In this case, the histograms are computed using \code{aes(y = stat(density)}. 
-#' @param time If the data is panel data, this argument can be used to provide the time variable. Yet, in this case, the data has to be transformed into the long format. This argument only works in combination with the following argument "key" (see examples).
-#' @param key If the data is panel data, this argument can be used to provide the key variable (variable that indicates the variable names in the long format). Again, in this case, the data has to be transformed into the long format. This argument only works in combination with the following argument "time" (see examples).
 #' @return A \code{\link[ggplot2]{ggplot}} object that can be further customized using standard ggplot2 elements.
 #' @examples
-#' ## Example 1: Standard usage
-#' 
 #' d <- data.frame(x = rnorm(100, 3, 1),
 #'                 y = rnorm(100, 3, 1))
 #'
@@ -20,21 +16,9 @@
 #' hist_var_plot(d, density = F)
 #' hist_var_plot(d)
 #'
-#' # One variables
-#' hist_var_plot(d$x)
-#'
-#' ## Example 2: Panel data
-#'
-#' d <- data.frame(T1_var1 = rnorm(100, 3, 1),
-#'                 T2_var1 = rnorm(100, 3.5, 1),
-#'                 T1_var2 = rnorm(100, 2, 1),
-#'                 T2_var2 = rnorm(100, 1.5, 1))
-#'
-#' # Transforming data into long format
-#' d %>% 
-#'   gather(key, value) %>%
-#'   separate(key, c("time", "key"), sep = 2) %>%
-#'   hist_var_plot(., time = time, key = code)
+#' # One variable
+#' hist_var_plot(d$x, fill = "lightblue", bins = 10) +
+#'    theme_minimal()
 #' @export
 hist_var_plot <- function(data, 
                           bins = 5, 
@@ -56,10 +40,9 @@ hist_var_plot <- function(data,
     }
   
   ### If data is a single numeric variable
-  if ((is.element("integer", class_data) | 
+  if (is.element("integer", class_data) | 
       is.element("double", class_data) | 
-      is.element("numeric", class_data)) &
-      is.null(time)) {
+      is.element("numeric", class_data)) {
     
     
     if (density == FALSE) {
@@ -96,8 +79,7 @@ hist_var_plot <- function(data,
     } 
   
     ## Plotting a data frame with several numeric variables
-  } else if (is.element("data.frame", class_data) &
-             is.null(time)) {
+  } else if (is.element("data.frame", class_data)) {
 
       # step 1: ransform data
       data_long <- data %>% 
@@ -139,44 +121,6 @@ hist_var_plot <- function(data,
         
         return(plot)
       }
-      
-    } else if (!is.null(time)) {
-      
-      if (density == FALSE) {
-      
-      # Only histogram
-      plot <- ggplot(data,
-                     aes(x = value)) + 
-        geom_histogram(bins = bins,
-                       fill = fill,
-                       color = color) +
-        facet_grid(key~time) +
-        labs(x = "Value",
-             y = "Density")
-      
-      return(plot)
-      
-    } else {
-      
-      # histogram with normal distribution density curve
-      plot <- ggplot(data, 
-                     aes(x = value)) + 
-        geom_histogram(aes(y = stat(density)), 
-                       bins = bins,
-                       fill = fill,
-                       color = color) +
-        stat_function(fun = dnorm, 
-                      args = list(mean = mean(data$value),
-                                  sd = sd(data$value)), 
-                      lwd = .5, 
-                      col = "black") +
-        facet_grid(key~time) +
-        labs(x = "Value",
-             y = "Density")
-      
-      return(plot)
-      
-    }
     
     } else {
     
