@@ -15,13 +15,13 @@ describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE, ...)
 
 \item{col_sum}{Logical value indicating whether column sums should be returned}
 
-\item{...}{Further arguments that can be passed to \code{\link[base::table]{table()}}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}}
+\item{...}{Further arguments that can be passed to \code{\link[base]{table}}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}}
 }
 \value{
-A tibble.
+The function \code{describe_factor()} returns a contigency table with relative and absolute values and an object of class \code{tbl_df} (a data frame).
 }
 \description{
-This function takes a factor variable (numeric variables are transformed into a factor variable) and computes a basic frequency table. Column sums are added automatically, but can be removed if desired. By default, NAs will be removed before computation. Yet, arguments that are usally passed to the \code{\link[base::table]{table()}} function can be added to also count NAs (useNA = "always").
+This function takes a factor variable (numeric variables are transformed into a factor variable) and computes a basic frequency table. Column sums are added automatically, but can be removed if desired. By default, NAs will be removed before computation. Yet, arguments that are usally passed to the \code{\link[base]{table}} function can be added to also count NAs (useNA = "always").
 }
 \examples{
 # Standard example
@@ -30,5 +30,7 @@ describe_factor(d$cyl, name = "No. of cylinders")
 
 # Example with missing values
 d$cyl[3] <- NA # Creating a missing value
-describe_factor(d$cyl, name = "No. of cylinders", useNA = "always")
+describe_factor(d$cyl, 
+                name = "No. of cylinders", 
+                useNA = "always") \%>\% class
 }
