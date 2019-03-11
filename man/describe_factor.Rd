@@ -2,7 +2,7 @@
 % Please edit documentation in R/describe_factor.r
 \name{describe_factor}
 \alias{describe_factor}
-\title{Computes a frequency table for factor variables}
+\title{A frequency table for factor variables}
 \usage{
 describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE, ...)
 }
@@ -13,15 +13,15 @@ describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE, ...)
 
 \item{labels}{If you are evaluating a numeric vector, the function will transform it into a factor variable. You can specify custom labels for the factor levels here.}
 
-\item{col_sum}{Do you want column sums?}
+\item{col_sum}{Logical value indicating whether column sums should be returned}
 
-\item{...}{Further arguments that can be passed to \code{table}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}}
+\item{...}{Further arguments that can be passed to \code{\link[base::table]{table()}}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}}
 }
 \value{
 A tibble.
 }
 \description{
-This function takes a factor variable (numeric variables are transformed into a factor variable) and computes a basic frequency table. Column sums are added automatically, but can be removed if desired. By default, NAs will be removed before computation. Yet, arguments that are usally passed to the \code{table()} function can be added to also count NAs (useNA = "always").
+This function takes a factor variable (numeric variables are transformed into a factor variable) and computes a basic frequency table. Column sums are added automatically, but can be removed if desired. By default, NAs will be removed before computation. Yet, arguments that are usally passed to the \code{\link[base::table]{table()}} function can be added to also count NAs (useNA = "always").
 }
 \examples{
 # Standard example

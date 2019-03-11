@@ -1,12 +1,12 @@
-#' Computes a frequency table for factor variables
+#' A frequency table for factor variables
 #' 
-#' This function takes a factor variable (numeric variables are transformed into a factor variable) and computes a basic frequency table. Column sums are added automatically, but can be removed if desired. By default, NAs will be removed before computation. Yet, arguments that are usally passed to the \code{table()} function can be added to also count NAs (useNA = "always"). 
+#' This function takes a factor variable (numeric variables are transformed into a factor variable) and computes a basic frequency table. Column sums are added automatically, but can be removed if desired. By default, NAs will be removed before computation. Yet, arguments that are usally passed to the \code{\link[base]{table()}} function can be added to also count NAs (useNA = "always"). 
 #' 
 #' @param x A numeric or factor variable.
 #' @param name A name for the first colum (if not specified, it remains the variable code).
 #' @param labels If you are evaluating a numeric vector, the function will transform it into a factor variable. You can specify custom labels for the factor levels here.
-#' @param col_sum Do you want column sums?
-#' @param ... Further arguments that can be passed to \code{table}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}
+#' @param col_sum Logical value indicating whether column sums should be returned
+#' @param ... Further arguments that can be passed to \code{\link[base]{table()}}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}
 #' @return A tibble. 
 #' @examples 
 #' # Standard example
@@ -15,7 +15,9 @@
 #' 
 #' # Example with missing values
 #' d$cyl[3] <- NA # Creating a missing value
-#' describe_factor(d$cyl, name = "No. of cylinders", useNA = "always")
+#' describe_factor(d$cyl, 
+#'                 name = "No. of cylinders", 
+#'                 useNA = "always")
 #' @export
 describe_factor <- function(x,
                             name = NULL,
