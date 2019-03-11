@@ -19,7 +19,7 @@
 #' d$cyl[3] <- NA # Creating a missing value
 #' describe_factor(d$cyl, 
 #'                 name = "No. of cylinders", 
-#'                 useNA = "always") %>% class
+#'                 useNA = "always")
 #' @export
 describe_factor <- function(x,
                             name = NULL,
