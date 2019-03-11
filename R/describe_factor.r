@@ -8,6 +8,8 @@
 #' @param col_sum Logical value indicating whether column sums should be returned
 #' @param ... Further arguments that can be passed to \code{\link[base]{table}}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}
 #' @return The function \code{describe_factor()} returns a contigency table with relative and absolute values and an object of class \code{tbl_df} (a data frame).
+#' @import tidyverse
+#' @import magrittr
 #' @examples 
 #' # Standard example
 #' d <- mtcars
@@ -24,9 +26,6 @@ describe_factor <- function(x,
                             labels = NULL,
                             col_sum = TRUE,
                             ...){
-  # dependencies
-  library(tidyverse)
-  library(magrittr)
   
   # function
   if (!is.null(labels)) {
