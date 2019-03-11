@@ -2,25 +2,27 @@
 % Please edit documentation in R/count_na.R
 \name{count_na}
 \alias{count_na}
-\title{Count overall amount of missing values}
+\title{Amount of missing values in a data set}
 \usage{
-count_na(data, percent = TRUE)
+count_na(data, percent = TRUE, col_sum = TRUE)
 }
 \arguments{
 \item{data}{A data frame.}
 
 \item{percent}{A logical value indicating whether to compute also the percentage (defaults to TRUE).}
+
+\item{col_sum}{A logical value indicating whether the column sums should be returned.}
 }
 \value{
-A tibble..
+A tibble.
 }
 \description{
-This function counts the overall amount of missing values in a data set and returns a printable table.
+This function produces a table with the overall amount of missing values in a data set (absolute and relative values).
 }
 \examples{
 d <- mtcars
 d[4,3] <- NA # Create missing values to illustrate function
 
 count_na(d, percent = FALSE)
-count_na(d)
+count_na(d, col_sum = FALSE)
 }
