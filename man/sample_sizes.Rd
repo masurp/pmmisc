@@ -5,12 +5,16 @@
 \title{Creates table with sample sizes and attrition rates}
 \usage{
 sample_sizes(..., sample = c("All cases", "Eligible cases",
-  "Complete cases"))
+  "Complete cases"), digits = 1, print = FALSE)
 }
 \arguments{
 \item{...}{Several numeric values representing sample sizes (e.g., obtained by using \code{\link[pmmisc]{save_n}}).}
 
 \item{sample}{Names for the rows in the final table.}
+
+\item{digits}{Number of digits that should be print (only in combination with \code{print = TRUE}).}
+
+\item{print}{Logical value indicating whether the output should be formatted to fit APA-guidelines (transform varibales to character vectors).}
 }
 \value{
 An object of class \code{tbl_df} that can be passed to \code{\link[papaja]{apa_table}}. It contains all sample sizes that were provided as individual numeric values.
@@ -20,7 +24,7 @@ This functions binds individual numeric values (representing sample sizes) into 
 }
 \examples{
 # Simple example
-sample_sizes(100, 80, 10)
+sample_sizes(100, 80, 10, print = TRUE)
 
 # Realistic example
 d <- mtcars
@@ -32,4 +36,10 @@ n1 <- save_n(d1)
 n2 <- save_n(d2)
 
 sample_sizes(n0, n1, n2)
+sample_sizes(n0, n1, n2, 
+             sample = c("Sample 1", 
+                        "Sample 2",
+                        "Sample 3"),
+             digits = 3,
+             print = TRUE)
 }
