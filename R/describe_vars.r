@@ -7,10 +7,14 @@
 #' @param var_name If you are evaluating a single vector, you specify the variable name here. 
 #' @param brief A logical value indicating wether all psychometrics or only the mean and the standard deviations should be printed
 #' @param first_col How should the first column be named? Defaults to "code".
+#' @param n Logical value indicating whether the number of valid cases should be included in the output.
+#' @param print Logical value indicating whether the output should be formated according to APA-guidelines (if true, the output can easily be printed with the function \code{\link[papakja]{apa_table}}).
+#' @param digits A numeric value indicating how many digits should be printed (only works together with \code{print = TRUE})
 #' @param ... Further arguments that can be passed to \code{describe}.
-#' @return A tibble. 
+#' @return A data frame with relevant item statistics such as mean, standard deviation, minimum, maximum, skewness and kurtosis.
 #' @examples 
 #' describe_vars(mtcars)
+#' describe_vars(mtcars, n = TRUE, print = TRUE, digits = 3)
 #' describe_vars(mtcars$cyl, var_name = "cylinder")
 #' @export
 describe_vars <- function(data, 
@@ -18,16 +22,21 @@ describe_vars <- function(data,
                           var_name = NULL, 
                           brief = FALSE, 
                           first_col = "code",
+                          n = FALSE,
+                          print = FALSE,
+                          digits = 2,
                           ...) {
   
   # dependencies
   library(psych)
   library(tidyverse)
+  library(papaja)
   
   temp <- data %>%
     describe(., ...) %>%
     as.data.frame %>%
-    rownames_to_column(first_col) 
+    rownames_to_column(first_col) %>%
+    as.tibble
   
   if (!is.null(items)) {
     items$code <- as.character(items$code)
@@ -51,17 +60,30 @@ describe_vars <- function(data,
   }
   
   if (isTRUE(brief) & !is.null(items)) {
-    temp %>%
+    temp <- temp %>%
       select(first_col, item, mean, sd) %>%
       as.tibble
-  } else if (isTRUE(brief) & is.null(items)){
-    temp %>%
+  }
+  
+  if (isTRUE(brief) & is.null(items)){
+    temp <- temp %>%
       select(first_col, mean, sd) %>%
       as.tibble
-  } else {
-    temp %>% 
-      as.tibble
+  } 
+  
+  if (!isTRUE(n)) {
+    temp <- temp %>%
+      select(-n)
   }
+  
+  if (isTRUE(print)) {
+    temp <- temp %>%
+      mutate_at(vars(mean:kurtosis), 
+                funs(printnum(., digits = digits)))
+    
+  }
+  
+  return(temp)
 }
 
 

@@ -5,7 +5,7 @@
 \title{Customized version of the function describe (psych) for single and multiple numeric variables}
 \usage{
 describe_vars(data, items = NULL, var_name = NULL, brief = FALSE,
-  first_col = "code", ...)
+  first_col = "code", n = FALSE, print = FALSE, digits = 2, ...)
 }
 \arguments{
 \item{data}{A data frame that includes that variables that should be evaluated. Can also be a vector with numeric values.}
@@ -18,15 +18,22 @@ describe_vars(data, items = NULL, var_name = NULL, brief = FALSE,
 
 \item{first_col}{How should the first column be named? Defaults to "code".}
 
+\item{n}{Logical value indicating whether the number of valid cases should be included in the output.}
+
+\item{print}{Logical value indicating whether the output should be formated according to APA-guidelines (if true, the output can easily be printed with the function \code{\link[papakja]{apa_table}}).}
+
+\item{digits}{A numeric value indicating how many digits should be printed (only works together with \code{print = TRUE})}
+
 \item{...}{Further arguments that can be passed to \code{describe}.}
 }
 \value{
-A tibble.
+A data frame with relevant item statistics such as mean, standard deviation, minimum, maximum, skewness and kurtosis.
 }
 \description{
 This function is essentially a customized version of the function \code{describe()} included the package \code{psych}, but provides some additional benefits: First, it transforms the the output into a tibble. Second, it reduces the number of psychometrics down to the most important ones. Third, it allows to include item formulations drawn from an additional data frame (needs to have a variable "code" that includes similar variable codes as the original data frame and a variable named "item" that includes the item formulations). Overall, it provides enough functionality to create a printable "Table 1".
 }
 \examples{
 describe_vars(mtcars)
+describe_vars(mtcars, n = TRUE, print = TRUE, digits = 3)
 describe_vars(mtcars$cyl, var_name = "cylinder")
 }
