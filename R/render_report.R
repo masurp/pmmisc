@@ -13,8 +13,7 @@
 render_report = function(file, name) {
   rmarkdown::render(
     file, params = list(
-      name = name,
-      numner = number
+      name = name
     ),
     output_file = paste0(name, ".html")
   )
