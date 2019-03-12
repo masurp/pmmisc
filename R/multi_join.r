@@ -1,6 +1,6 @@
-#' Customized version of the function inner_join() (dplyr) for more than two data frames
+#' Merging of up to five data sets at the same time
 #' 
-#' This function joins up to five data sets using the function \code{inner_join} from the package "dplyr". Each data set is individually joined with the next one. This way, several data sets of which only pairs have the same id variable can be joined. 
+#' This function joins up to five data sets using the function \code{\link{dplyr}inner_join} from the package "dplyr". Each data set is individually joined with the next one. This way, several data sets of which only pairs have the same id variable can be joined. 
 #' 
 #' @param ... Up to five data frames that should be joined.  
 #' @return A data frame.
@@ -20,7 +20,6 @@
 multi_join <- function(...){
   
   # dependencies
-  if(!require(dplyr)){install.packages('dplyr')}
   library(dplyr)
   
   # function

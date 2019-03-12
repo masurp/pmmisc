@@ -2,7 +2,7 @@
 % Please edit documentation in R/multi_join.r
 \name{multi_join}
 \alias{multi_join}
-\title{Customized version of the function inner_join() (dplyr) for more than two data frames}
+\title{Merging of up to five data sets at the same time}
 \usage{
 multi_join(...)
 }
@@ -13,7 +13,7 @@ multi_join(...)
 A data frame.
 }
 \description{
-This function joins up to five data sets using the function \code{inner_join} from the package "dplyr". Each data set is individually joined with the next one. This way, several data sets of which only pairs have the same id variable can be joined.
+This function joins up to five data sets using the function \code{\link{dplyr}inner_join} from the package "dplyr". Each data set is individually joined with the next one. This way, several data sets of which only pairs have the same id variable can be joined.
 }
 \examples{
 # Creating several data frames.
