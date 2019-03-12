@@ -4,19 +4,19 @@
 \alias{sample_sizes}
 \title{Creates table with sample sizes and attrition rates}
 \usage{
-sample_sizes(..., sample = c("Overall clicks", "Eligible cases",
+sample_sizes(..., sample = c("All cases", "Eligible cases",
   "Complete cases"))
 }
 \arguments{
-\item{...}{Several numeric values representing sample sizes (e.g., obtained by using \code{save_n()}}
+\item{...}{Several numeric values representing sample sizes (e.g., obtained by using \code{\link[pmmisc]{save_n}}).}
 
 \item{sample}{Names for the rows in the final table.}
 }
 \value{
-An object of class \code{tibble} that can be passed to \code{apa_table()}. It contains all sample sizes that were provided as individual numeric values.
+An object of class \code{tbl_df} that can be passed to \code{\link[papaja]{apa_table}}. It contains all sample sizes that were provided as individual numeric values.
 }
 \description{
-This functions binds individual numeric values (representing sample sizes) into a printable table. It is a follow-up function for \code{save_n} which extracts the number of cases in a data frame.
+This functions binds individual numeric values (representing sample sizes) into a printable table. It is a follow-up function for \code{\link[pmmisc]{save_n}} which extracts the number of cases in a data frame.
 }
 \examples{
 # Simple example
