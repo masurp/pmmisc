@@ -2,18 +2,18 @@
 % Please edit documentation in R/invert.r
 \name{invert}
 \alias{invert}
-\title{Invert 5- or 7-point scales}
+\title{Invert scales with any number of answer options}
 \usage{
 invert(x, length = 5)
 }
 \arguments{
-\item{x}{The variables that should be inverted}
+\item{x}{The variable that should be inverted.}
 
-\item{length}{Is it a 5-point of 7-point scale?}
+\item{length}{Number of answer options (defaults to )}
 }
 \value{
-A vector
+A vector representing the recoded variable.
 }
 \description{
-This function serves as a wrapper for \code{recode} from the "car" package. It allows to easily invert 5- or 7-point scales.
+This function allows to easily invert items with any number of answer options.
 }
