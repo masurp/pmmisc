@@ -7,7 +7,7 @@
 invert(x, length = 5)
 }
 \arguments{
-\item{x}{The variable that should be inverted.}
+\item{x}{The variable that should be inverted (needs to be numeric!).}
 
 \item{length}{Number of answer options (defaults to )}
 }
