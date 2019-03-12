@@ -1,19 +1,19 @@
 #' Create histograms for several Likert-type variables
 #' 
-#' This functions computes a facetted plot of variable distributions. Using the density function, the first layer is a histogram and the second a normal distributed density curve based on the mean and standard deviation of the respective variable.  
+#' This functions computes a facetted plot of variable distributions using the function \code{\link[ggplot2]{ggplot}}. The first layer is a histogram and the second a normal distributed density curve based on the mean and standard deviation of the respective variable. Both a data frame containing several variables or a single vector can be passed to the function. 
 #' 
 #' @param data An object of one of the following classes: "numeric", "double", "integer", "data.frame", "tbl", or "tbl_df".
 #' @param bins Number of values that should be plotted on the x-axis (should equal the number of answer options or a reasonable scale).
 #' @param fill Color of the bins (defaults to green). 
 #' @param color Color of the bin borders (defaults to white).
 #' @param density A logical value indicating whether a normally distributed density curve should be plotted on top of the histogram. The density curve takes the mean and sd of the respective variables as arguments. In this case, the histograms are computed using \code{aes(y = stat(density)}. 
-#' @return A \code{\link[ggplot2]{ggplot}} object that can be further customized using standard ggplot2 elements.
+#' @return A \code{\link[ggplot2]{gg}} object that can be further customized using standard ggplot2 elements (e.g., + theme_minimal(), + ylimit(0,10), ...).
 #' @examples
 #' d <- data.frame(x = rnorm(100, 3, 1),
 #'                 y = rnorm(100, 3, 1))
 #'
 #' # Several variables
-#' hist_var_plot(d, density = F)
+#' hist_var_plot(d, density = F) %>% class
 #' hist_var_plot(d)
 #'
 #' # One variable

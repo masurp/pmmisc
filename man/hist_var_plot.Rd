@@ -19,17 +19,17 @@ hist_var_plot(data, bins = 5, fill = "#5e999b", color = "white",
 \item{density}{A logical value indicating whether a normally distributed density curve should be plotted on top of the histogram. The density curve takes the mean and sd of the respective variables as arguments. In this case, the histograms are computed using \code{aes(y = stat(density)}.}
 }
 \value{
-A \code{\link[ggplot2]{ggplot}} object that can be further customized using standard ggplot2 elements.
+A \code{\link[ggplot2]{gg}} object that can be further customized using standard ggplot2 elements (e.g., + theme_minimal(), + ylimit(0,10), ...).
 }
 \description{
-This functions computes a facetted plot of variable distributions. Using the density function, the first layer is a histogram and the second a normal distributed density curve based on the mean and standard deviation of the respective variable.
+This functions computes a facetted plot of variable distributions using the function \code{\link[ggplot2]{ggplot}}. The first layer is a histogram and the second a normal distributed density curve based on the mean and standard deviation of the respective variable. Both a data frame containing several variables or a single vector can be passed to the function.
 }
 \examples{
 d <- data.frame(x = rnorm(100, 3, 1),
                 y = rnorm(100, 3, 1))
 
 # Several variables
-hist_var_plot(d, density = F)
+hist_var_plot(d, density = F) \%>\% class
 hist_var_plot(d)
 
 # One variable
