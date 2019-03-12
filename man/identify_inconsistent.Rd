@@ -11,8 +11,11 @@ identify_inconsistent(..., na.rm = FALSE)
 
 \item{na.rm}{Should people with missings in one of the variables be excluded (i.e., receive the value "-99")?}
 }
+\value{
+A vector in which participants with consistent answers receive the matching value and participants with inconsistent answers recevied a "-99".
+}
 \description{
-When conducting a panel study, we often want to know whether the same person answers all the waves. One way of investigating this is to check whether people provided consistent birthdates or gender across several waves. This function allows to check the consistency between up to three variables. It returns a vector with the consistent values. Participants with inconsistent answers receive the number \code{-99} which can in turn be used to subset the overall data set.
+When conducting a panel study, we often want to know whether the same person has answered at all waves. One way of investigating this is to check whether people provided consistent birthdates or gender across several waves. This function allows to check the consistency in answers between up to three variables. It returns a vector with the consistent values. Participants with inconsistent answers receive the number \code{-99} which can in turn be used to subset the overall data set.
 }
 \examples{
 # Create example data
