@@ -6,7 +6,7 @@
 \usage{
 missing_pattern_plot(data, colors = c("#2F6FAF", "lightblue"),
   labels = c("A", "B"), var_labels = FALSE, frequency = TRUE,
-  ratio = c(2.5, 1), nrow = 1)
+  percent = FALSE, ratio = c(2.5, 1), nrow = 1)
 }
 \arguments{
 \item{data}{The data frame that should be evaluated.}
@@ -19,12 +19,14 @@ missing_pattern_plot(data, colors = c("#2F6FAF", "lightblue"),
 
 \item{frequency}{A logical value indicating whether the frequency of the missingness pattens should be plotted to.}
 
+\item{percent}{A logical value indicating whether the share of cases that have a particular missingness pattern should be plotted into the frequency table (still beta, doesn't look very nice..., simply helps to understand the data)}
+
 \item{ratio}{Vector specifying the size of both plots in comparison to one another.}
 
 \item{nrow}{Should the plots be printed underneath or next to each other? Defaults to "next to each other".}
 }
 \value{
-A gtable.
+A \code{gtable} which consists by default of two plots: (A) An overview of all existing missingness patterns in the data frame, (B) a frequency table representing how often the particular missingness patterns can be found in the data frame.
 }
 \description{
 This function plots the missingness patterns and (if desired) also their their frequencies in the data frame.

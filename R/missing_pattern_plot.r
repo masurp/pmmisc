@@ -7,9 +7,10 @@
 #' @param labels Both plots can be named individually. By default, they are simply labelled "A" and "B".
 #' @param var_labels A logical value indicating whether variable names should be plotted (if many variables are in the data frame, setting this to TRUE can be messy).
 #' @param frequency A logical value indicating whether the frequency of the missingness pattens should be plotted to.
+#' @param percent A logical value indicating whether the share of cases that have a particular missingness pattern should be plotted into the frequency table (still beta, doesn't look very nice..., simply helps to understand the data)
 #' @param ratio Vector specifying the size of both plots in comparison to one another.
 #' @param nrow Should the plots be printed underneath or next to each other? Defaults to "next to each other".
-#' @return A gtable.
+#' @return A \code{gtable} which consists by default of two plots: (A) An overview of all existing missingness patterns in the data frame, (B) a frequency table representing how often the particular missingness patterns can be found in the data frame. 
 #' @examples
 #' d <- mtcars
 #' d[4,3] <- NA # Create missing to illustrate function
@@ -24,6 +25,7 @@ missing_pattern_plot <- function(data,
                                  labels = c("A", "B"),
                                  var_labels = FALSE,
                                  frequency = TRUE,
+                                 percent = FALSE,
                                  ratio = c(2.5,1),
                                  nrow = 1){
   
@@ -100,6 +102,11 @@ missing_pattern_plot <- function(data,
           axis.text.y = element_blank(),
           axis.ticks.y = element_blank()) +
     labs(y = "N. of cases")
+   
+   if (isTRUE(percent)) {
+     side_plot <- side_plot +
+       geom_text(aes(label = (sum/nrow(data))*100))
+   }
    
    plot_grid(main_plot, side_plot, 
              labels = labels, 
