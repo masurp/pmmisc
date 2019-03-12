@@ -29,6 +29,9 @@ describe_factor <- function(x,
   library(tidyverse)
   library(magrittr)
   
+  # Get var name
+  name_var = deparse(substitute(x))
+  
   # function
   if (!is.null(labels)) {
     x <- factor(x, 
@@ -65,6 +68,9 @@ describe_factor <- function(x,
   if (!is.null(name)) {
     temp <- temp %>%
       set_colnames(., c(name, "n", "percent"))
+  } else {
+    temp <- temp %>%
+      set_colnames(c(name_var, "n", "percent"))
   }
     
   return(temp)
