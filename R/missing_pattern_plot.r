@@ -43,7 +43,7 @@ missing_pattern_plot <- function(data,
   color_2 <- colors[2]
   
   temp <- data %>% 
-    md.pattern %>% 
+    md.pattern(plot = FALSE) %>% 
     as.data.frame %>%
     rownames_to_column("sum") %>% 
     select(-ncol(.)) %>%
