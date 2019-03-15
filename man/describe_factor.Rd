@@ -4,8 +4,8 @@
 \alias{describe_factor}
 \title{A frequency table for factor variables}
 \usage{
-describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE,
-  view = FALSE, ...)
+describe_factor(x, name = NULL, labels = NULL, cum_percent = FALSE,
+  col_sum = TRUE, view = FALSE, ...)
 }
 \arguments{
 \item{x}{A numeric or factor variable.}
@@ -13,6 +13,8 @@ describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE,
 \item{name}{A name for the first colum (if not specified, it remains the variable code).}
 
 \item{labels}{If you are evaluating a numeric vector, the function will transform it into a factor variable. You can specify custom labels for the factor levels here.}
+
+\item{cum_percent}{Logical value indicating whether cumulative percent should also be returned.}
 
 \item{col_sum}{Logical value indicating whether column sums should be returned.}
 
@@ -36,5 +38,6 @@ describe_factor(d$mpg, view = TRUE)
 d$cyl[3] <- NA # Creating a missing value
 describe_factor(d$cyl, 
                 name = "No. of cylinders", 
+                cum_percent = TRUE,
                 useNA = "always")
 }

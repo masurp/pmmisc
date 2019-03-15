@@ -5,6 +5,7 @@
 #' @param x A numeric or factor variable.
 #' @param name A name for the first colum (if not specified, it remains the variable code).
 #' @param labels If you are evaluating a numeric vector, the function will transform it into a factor variable. You can specify custom labels for the factor levels here.
+#' @param cum_percent Logical value indicating whether cumulative percent should also be returned.
 #' @param col_sum Logical value indicating whether column sums should be returned.
 #' @param view Logical value indicating whether the full data frame should be printed (defaults to FALSE).
 #' @param ... Further arguments that can be passed to \code{\link[base]{table}}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}
@@ -19,11 +20,13 @@
 #' d$cyl[3] <- NA # Creating a missing value
 #' describe_factor(d$cyl, 
 #'                 name = "No. of cylinders", 
+#'                 cum_percent = TRUE,
 #'                 useNA = "always")
 #' @export
 describe_factor <- function(x,
                             name = NULL,
                             labels = NULL,
+                            cum_percent = FALSE,
                             col_sum = TRUE,
                             view = FALSE,
                             ...){
@@ -58,6 +61,11 @@ describe_factor <- function(x,
     
     temp <- left_join(temp, temp2) %>%
       select(x, n, percent)
+    
+  if (isTRUE(cum_percent)) {
+    temp <- temp %>%
+      mutate('cumulative percent' = cumsum(percent))
+  }
 
   
   if (isTRUE(col_sum)) {
@@ -71,12 +79,19 @@ describe_factor <- function(x,
   
   if (!is.null(name)) {
     temp <- temp %>%
-      set_colnames(., c(name, "n", "percent"))
+      set_colnames(c(name, "n", "percent"))
   } else {
     temp <- temp %>%
       set_colnames(c(name_var, "n", "percent"))
   }
-   
+    
+    if (isTRUE(cum_percent)) {
+      temp <- temp %>%
+        set_colnames(c(name_var, "n", "percent", "cumulative percent"))
+      temp[,4][is.na(temp[,4])] <- 100
+    }
+    
+
   if (isTRUE(view)) {
     print(temp, n = Inf, width = Inf)
   } else {
