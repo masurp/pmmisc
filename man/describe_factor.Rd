@@ -4,7 +4,8 @@
 \alias{describe_factor}
 \title{A frequency table for factor variables}
 \usage{
-describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE, ...)
+describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE,
+  view = FALSE, ...)
 }
 \arguments{
 \item{x}{A numeric or factor variable.}
@@ -13,7 +14,9 @@ describe_factor(x, name = NULL, labels = NULL, col_sum = TRUE, ...)
 
 \item{labels}{If you are evaluating a numeric vector, the function will transform it into a factor variable. You can specify custom labels for the factor levels here.}
 
-\item{col_sum}{Logical value indicating whether column sums should be returned}
+\item{col_sum}{Logical value indicating whether column sums should be returned.}
+
+\item{view}{Logical value indicating whether the full data frame should be printed (defaults to FALSE).}
 
 \item{...}{Further arguments that can be passed to \code{\link[base]{table}}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}}
 }
@@ -27,6 +30,7 @@ This function takes a factor variable (numeric variables are transformed into a 
 # Standard example
 d <- mtcars
 describe_factor(d$cyl, name = "No. of cylinders")
+describe_factor(d$mpg, view = TRUE)
 
 # Example with missing values
 d$cyl[3] <- NA # Creating a missing value

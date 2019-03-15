@@ -5,13 +5,15 @@
 #' @param x A numeric or factor variable.
 #' @param name A name for the first colum (if not specified, it remains the variable code).
 #' @param labels If you are evaluating a numeric vector, the function will transform it into a factor variable. You can specify custom labels for the factor levels here.
-#' @param col_sum Logical value indicating whether column sums should be returned
+#' @param col_sum Logical value indicating whether column sums should be returned.
+#' @param view Logical value indicating whether the full data frame should be printed (defaults to FALSE).
 #' @param ... Further arguments that can be passed to \code{\link[base]{table}}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}
 #' @return The function \code{describe_factor()} returns a contigency table with relative and absolute values and an object of class \code{tbl_df} (a data frame).
 #' @examples 
 #' # Standard example
 #' d <- mtcars
 #' describe_factor(d$cyl, name = "No. of cylinders")
+#' describe_factor(d$mpg, view = TRUE)
 #' 
 #' # Example with missing values
 #' d$cyl[3] <- NA # Creating a missing value
@@ -23,6 +25,7 @@ describe_factor <- function(x,
                             name = NULL,
                             labels = NULL,
                             col_sum = TRUE,
+                            view = FALSE,
                             ...){
   
   # dependencies
@@ -40,12 +43,12 @@ describe_factor <- function(x,
     x <- factor(x)
   }
     
-    n <- x %>%
+   temp <- x %>%
       table(., ...) %>%
       as.tibble %>%
       rename(x = ".")
     
-    temp <- x %>%
+    temp2 <- x %>%
       table(., ...) %>%
       prop.table %>% 
       as.tibble %>%
@@ -53,8 +56,9 @@ describe_factor <- function(x,
       mutate(percent = n*100) %>%
       select(x, percent)
     
-    temp <- left_join(temp, n) %>%
+    temp <- left_join(temp, temp2) %>%
       select(x, n, percent)
+
   
   if (isTRUE(col_sum)) {
     temp <- temp %>% 
@@ -72,6 +76,10 @@ describe_factor <- function(x,
     temp <- temp %>%
       set_colnames(c(name_var, "n", "percent"))
   }
-    
-  return(temp)
+   
+  if (isTRUE(view)) {
+    print(temp, n = Inf, width = Inf)
+  } else {
+    return(temp)
+  }
 }
