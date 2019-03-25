@@ -8,7 +8,7 @@
 #' @param cum_percent Logical value indicating whether cumulative percent should also be returned.
 #' @param col_sum Logical value indicating whether column sums should be returned.
 #' @param view Logical value indicating whether the full data frame should be printed (defaults to FALSE).
-#' @param ... Further arguments that can be passed to \code{\link[base]{table}}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}
+#' @param ... Further arguments that can be passed to \code{\link[base]{table}}. This has been primarily included to allow the counting of NAs. If desired, simply add the following argument: \code{useNA = "always"}.
 #' @return The function \code{describe_factor()} returns a contigency table with relative and absolute values and an object of class \code{tbl_df} (a data frame).
 #' @examples 
 #' # Standard example
@@ -46,7 +46,7 @@ describe_factor <- function(x,
     x <- factor(x)
   }
     
-   temp <- x %>%
+    temp <- x %>%
       table(., ...) %>%
       as.tibble %>%
       rename(x = ".")
