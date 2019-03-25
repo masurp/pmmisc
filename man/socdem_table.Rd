@@ -35,5 +35,13 @@ gender <- c(rep("female", 3), rep("male", 3))
 edu <- c(rep("highschool", 2), rep("middleschool", 4))
 
 # Summarizing
-socdem_table(age, gender, edu)
+(table_1 <- socdem_table(age, gender, edu))
+
+# Rmarkdown table
+papaja::apa_table(
+  table_1,
+  caption = "Socio-Demographics",
+  stub_indents = list("Gender" = c(2,3),
+                      "Education" = c(4,5))
+)
 }
