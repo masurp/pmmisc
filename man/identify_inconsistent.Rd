@@ -9,7 +9,7 @@ identify_inconsistent(..., na.rm = FALSE)
 \arguments{
 \item{...}{The variables that should be evaluated (up to three).}
 
-\item{na.rm}{Should people with missings in one of the variables be excluded (i.e., receive the value "-99")?}
+\item{na.rm}{Should people with missings in one of the variables be excluded (i.e., receive the value "-99")? If not (the default), the remaining variables will be checked for consistency.}
 }
 \value{
 A vector in which participants with consistent answers receive the matching value and participants with inconsistent answers recevied a "-99".
