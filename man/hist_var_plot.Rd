@@ -25,12 +25,12 @@ A \code{\link[ggplot2]{gg}} object that can be further customized using standard
 This functions computes a facetted plot of variable distributions using the function \code{\link[ggplot2]{ggplot}}. The first layer is a histogram and the second a normal distributed density curve based on the mean and standard deviation of the respective variable. Both a data frame containing several variables or a single vector can be passed to the function.
 }
 \examples{
-d <- data.frame(x = rnorm(100, 3, 1),
-                y = rnorm(100, 3, 1))
+d <- data.frame(x = rnorm(200, 3, 1),
+                y = rnorm(200, 0, 1))
 
 # Several variables
-hist_var_plot(d, density = F) \%>\% class
-hist_var_plot(d)
+hist_var_plot(d, density = F, bins = 10) 
+hist_var_plot(d, bins = 10)
 
 # One variable
 hist_var_plot(d$x, fill = "lightblue", bins = 10) +

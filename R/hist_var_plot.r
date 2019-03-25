@@ -9,12 +9,12 @@
 #' @param density A logical value indicating whether a normally distributed density curve should be plotted on top of the histogram. The density curve takes the mean and sd of the respective variables as arguments. In this case, the histograms are computed using \code{aes(y = stat(density)}. 
 #' @return A \code{\link[ggplot2]{gg}} object that can be further customized using standard ggplot2 elements (e.g., + theme_minimal(), + ylimit(0,10), ...).
 #' @examples
-#' d <- data.frame(x = rnorm(100, 3, 1),
-#'                 y = rnorm(100, 3, 1))
+#' d <- data.frame(x = rnorm(200, 3, 1),
+#'                 y = rnorm(200, 0, 1))
 #'
 #' # Several variables
-#' hist_var_plot(d, density = F) %>% class
-#' hist_var_plot(d)
+#' hist_var_plot(d, density = F, bins = 10) 
+#' hist_var_plot(d, bins = 10)
 #'
 #' # One variable
 #' hist_var_plot(d$x, fill = "lightblue", bins = 10) +
@@ -32,6 +32,7 @@ hist_var_plot <- function(data,
   library(dplyr)
   library(tidyr)
   library(ggplot2)
+  library(plyr)
   
   # get class
   class_data <- class(data)
@@ -105,6 +106,14 @@ hist_var_plot <- function(data,
         
       } else {
         
+        grid <- with(data_long, seq(min(value), max(value), length = 100))
+        normaldens <- ddply(data_long, "key", function(df) {
+          data.frame( 
+            value = grid,
+            density = dnorm(grid, mean(df$value), sd(df$value))
+          )
+        })
+        
         # histogram with normal distribution density curve
         plot <- ggplot(data_long, 
                        aes(x = value)) + 
@@ -112,11 +121,7 @@ hist_var_plot <- function(data,
                          bins = bins,
                          fill = fill,
                          color = color) +
-          stat_function(fun = dnorm, 
-                        args = list(mean = mean(data_long$value),
-                                    sd = sd(data_long$value)), 
-                        lwd = .5, 
-                        col = "black") +
+          geom_line(aes(y = density), data = normaldens, colour = "black") +
           facet_wrap(~key) +
           labs(x = "Value",
                y = "Density")
