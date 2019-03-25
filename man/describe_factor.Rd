@@ -20,7 +20,7 @@ describe_factor(x, name = NULL, labels = NULL, cum_percent = FALSE,
 
 \item{view}{Logical value indicating whether the full data frame should be printed (defaults to FALSE).}
 
-\item{...}{Further arguments that can be passed to \code{\link[base]{table}}. This has been primarily included to allow to count NAs. In this case, simply add the following argument: \code{useNA = "always"}}
+\item{...}{Further arguments that can be passed to \code{\link[base]{table}}. This has been primarily included to allow the counting of NAs. If desired, simply add the following argument: \code{useNA = "always"}.}
 }
 \value{
 The function \code{describe_factor()} returns a contigency table with relative and absolute values and an object of class \code{tbl_df} (a data frame).
