@@ -17,7 +17,7 @@ count_na(data, percent = TRUE, col_sum = TRUE)
 A tibble.
 }
 \description{
-This function produces a table with the overall amount of missing values in a data set (absolute and relative values). #'
+This function produces a table with the overall amount of missing values in a data set (absolute and relative values).
 }
 \examples{
 d <- mtcars

@@ -54,7 +54,7 @@ missing_pattern_plot <- function(data,
     dplyr::mutate(n = factor(n, levels = n[order(-sum)]))
   
    main_plot <- temp %>%
-    dplyr::gather(key, value, -n, -sum) %>%
+    gather(key, value, -n, -sum) %>%
     ggplot(.,
            aes(x = key, 
                y = n)) +
