@@ -15,7 +15,6 @@
 count_na <- function(data, 
                      percent = TRUE,
                      col_sum = TRUE) {
-  
   # dependencies
   library(tidyverse)
   library(magrittr)
