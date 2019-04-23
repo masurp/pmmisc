@@ -1,6 +1,7 @@
 #' Amount of missing values in a data set
 #' 
-#' This function produces a table with the overall amount of missing values in a data set (absolute and relative values). #'
+#' This function produces a table with the overall amount of missing values in a data set (absolute and relative values). 
+#'
 #' @param data A data frame.
 #' @param percent A logical value indicating whether to compute also the percentage (defaults to TRUE).
 #' @param col_sum A logical value indicating whether the column sums should be returned. 
