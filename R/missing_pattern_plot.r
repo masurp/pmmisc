@@ -43,18 +43,18 @@ missing_pattern_plot <- function(data,
   color_2 <- colors[2]
   
   temp <- data %>% 
-    md.pattern(plot = FALSE) %>% 
+    mice::md.pattern(plot = FALSE) %>% 
     as.data.frame %>%
-    rownames_to_column("sum") %>% 
+    tibble::rownames_to_column("sum") %>% 
     select(-ncol(.)) %>%
-    as.tibble %>%
+    as_tibble %>%
     subset(sum != "") %>%
-    mutate(sum = as.numeric(sum)) %>%
-    mutate(n = 1:nrow(.)) %>%
-    mutate(n = factor(n, levels = n[order(-sum)]))
+    dplyr::mutate(sum = as.numeric(sum)) %>%
+    dplyr::mutate(n = 1:nrow(.)) %>%
+    dplyr::mutate(n = factor(n, levels = n[order(-sum)]))
   
    main_plot <- temp %>%
-    gather(key, value, -n, -sum) %>%
+    dplyr::gather(key, value, -n, -sum) %>%
     ggplot(.,
            aes(x = key, 
                y = n)) +
