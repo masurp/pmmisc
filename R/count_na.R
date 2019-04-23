@@ -25,16 +25,16 @@ count_na <- function(data,
   n <- data %>%
     is.na %>%
     table %>%
-    as.tibble
+    as_tibble
   
   # percent of missings
   perc <- data %>%
     is.na %>%
     table %>%
     prop.table %>%
-    as.tibble %>%
-    mutate(percent = n*100) %>%
-    select(".", percent)
+    as_tibble %>%
+    dplyr::mutate(percent = n*100) %>%
+    dplyr::select(".", percent)
   
   if (percent != TRUE) {
     temp <- n %>%
@@ -43,9 +43,9 @@ count_na <- function(data,
     if (isTRUE(col_sum)) {
       temp <- temp %>% 
         bind_rows(temp %>% 
-                    summarize(n = sum(n)) %>%
-                    mutate(missings = "sum") %>%
-                    select(missings, n))
+                    dplyr::summarize(n = sum(n)) %>%
+                    dplyr::mutate(missings = "sum") %>%
+                    dplyr::select(missings, n))
     }
     
   } else {
@@ -55,15 +55,13 @@ count_na <- function(data,
     if (isTRUE(col_sum)) {
       temp <- temp %>% 
         bind_rows(temp %>% 
-                    summarize(n = sum(n),
+                    dplyr::summarize(n = sum(n),
                               percent = sum(percent)) %>%
-                    mutate(missings = "sum") %>%
-                    select(missings, n, percent))
+                    dplyr::mutate(missings = "sum") %>%
+                    dplyr::select(missings, n, percent))
     }
     
   }
-  
-  
   
   return(temp)
 }
