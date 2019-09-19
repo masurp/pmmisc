@@ -4,7 +4,7 @@
 #' 
 #' @param data The data frame that should be evaluated.
 #' @param colors Colors to be used in the plot. 
-#' @param labels Both plots can be named individually. By default, they are simply labelled "A" and "B".
+#' @param titles Both plots can be named individually. By default, they are simply labelled "A" and "B".
 #' @param var_labels A logical value indicating whether variable names should be plotted (if many variables are in the data frame, setting this to TRUE can be messy).
 #' @param frequency A logical value indicating whether the frequency of the missingness pattens should be plotted to.
 #' @param percent A logical value indicating whether the share of cases that have a particular missingness pattern should be plotted into the frequency table (still beta, doesn't look very nice..., simply helps to understand the data)
@@ -22,7 +22,7 @@
 #' @export
 missing_pattern_plot <- function(data,
                                  colors = c("#2F6FAF", "lightblue"),
-                                 labels = c("A", "B"),
+                                 titles = c("A", "B"),
                                  var_labels = FALSE,
                                  frequency = TRUE,
                                  percent = FALSE,
@@ -61,7 +61,7 @@ missing_pattern_plot <- function(data,
     geom_tile(aes(fill = factor(value, 
                                 labels = c("TRUE", 
                                            "FALSE"))),
-                color = "white") +
+                  color = "white") +
     scale_fill_manual(values = colors) +
     theme_minimal() +
     labs(x = "Variables",
@@ -109,7 +109,7 @@ missing_pattern_plot <- function(data,
    }
    
    plot_grid(main_plot, side_plot, 
-             labels = labels, 
+             labels = titles, 
              rel_widths = ratio, 
              align = "h", 
              nrow = nrow)

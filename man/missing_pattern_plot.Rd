@@ -5,7 +5,7 @@
 \title{Missingness pattern plot}
 \usage{
 missing_pattern_plot(data, colors = c("#2F6FAF", "lightblue"),
-  labels = c("A", "B"), var_labels = FALSE, frequency = TRUE,
+  titles = c("A", "B"), var_labels = FALSE, frequency = TRUE,
   percent = FALSE, ratio = c(2.5, 1), nrow = 1)
 }
 \arguments{
@@ -13,7 +13,7 @@ missing_pattern_plot(data, colors = c("#2F6FAF", "lightblue"),
 
 \item{colors}{Colors to be used in the plot.}
 
-\item{labels}{Both plots can be named individually. By default, they are simply labelled "A" and "B".}
+\item{titles}{Both plots can be named individually. By default, they are simply labelled "A" and "B".}
 
 \item{var_labels}{A logical value indicating whether variable names should be plotted (if many variables are in the data frame, setting this to TRUE can be messy).}
 
