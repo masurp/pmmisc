@@ -1,24 +1,39 @@
-# pmmisc - Various Customized Functions for Data Wrangling and Descriptive Analyses
 
-This package includes some custom-made functions to facilitate some common data wrangling procedures as well as common computations in descriptive analyses. Please note that most functions are highly costumized to my own workflow. They may hence break in more general frameworks or when used in a different way...
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# pmmisc
+
+<!-- badges: start -->
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/specr)](https://CRAN.R-project.org/package=specr)
+<!-- badges: end -->
+
+This package includes some custom-made functions to facilitate some
+common data wrangling procedures as well as common computations in
+descriptive analyses. Please note that most functions are highly
+costumized to my own workflow. They may hence break in more general
+frameworks or when used in a different way…
 
 ## Dependencies
 
 Most functions require the following packages:
-  
-- For data wrangling procedure: `tidyverse` and `magrittr`
-- For printing and typesetting: `papaja`
-- For descriptive analyses: `psych`
-- For some plots: `gridExtra`
 
-These packages should be installed prior to using this package. 
+  - For data wrangling procedure: `tidyverse` and `magrittr`
+  - For printing and typesetting: `papaja`
+  - For descriptive analyses: `psych`
+  - For some plots: `gridExtra`
 
+These packages should be installed prior to using this package.
 
 ## Installation
 
-To install the package and latest developments, type the following commands into the R console:
-  
-```r
-library(devtools)
+You can install the development version from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
 devtools::install_github("masurp/pmmisc")
 ```
