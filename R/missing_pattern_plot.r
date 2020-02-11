@@ -13,12 +13,12 @@
 #' @return A \code{gtable} which consists by default of two plots: (A) An overview of all existing missingness patterns in the data frame, (B) a frequency table representing how often the particular missingness patterns can be found in the data frame. 
 #' @examples
 #' d <- mtcars
-#' d[4,3] <- NA # Create missing to illustrate function
+#' d[4,3:4] <- NA # Create missing to illustrate function
 #' 
 #' missing_pattern_plot(d)
 #' 
 #' # Add variable names and plot only patterns
-#' missing_pattern_plot(d, var_labels = T, frequency = F)
+#' missing_pattern_plot(d, var_labels = T, frequency = T)
 #' @export
 missing_pattern_plot <- function(data,
                                  colors = c("#2F6FAF", "lightblue"),
@@ -46,7 +46,7 @@ missing_pattern_plot <- function(data,
     mice::md.pattern(plot = FALSE) %>% 
     as.data.frame %>%
     tibble::rownames_to_column("sum") %>% 
-    select(-ncol(.)) %>%
+    dplyr::select(-ncol(.)) %>%
     as_tibble %>%
     subset(sum != "") %>%
     dplyr::mutate(sum = as.numeric(sum)) %>%
