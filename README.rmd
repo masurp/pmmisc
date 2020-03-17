@@ -9,7 +9,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  message = F,
+  warning = F
 )
 ```
 
@@ -42,3 +44,42 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("masurp/pmmisc")
 ```
+
+
+# Some usage examples
+
+```{r}
+library(pmmisc)
+library(dplyr)
+
+# Get example data
+d <- psych::bfi
+```
+
+
+## Simple data descriptions
+
+```{r}
+# Describe numeric variables
+d %>%
+  select(A1:A5) %>%
+  describe_vars(first_col = "items")
+
+# Describe factor variable
+describe_factor(d$gender,
+                name = "gender",
+                useNA = "ifany")
+```
+
+## Missing value analysis
+
+```{r}
+
+
+# Count overall missings
+count_na(d)
+
+# Plot missingness patterns
+missing_pattern_plot(d, var_labels = TRUE)
+```
+
