@@ -12,7 +12,7 @@
 #' @param nrow Should the plots be printed underneath or next to each other? Defaults to "next to each other".
 #' @return A \code{gtable} which consists by default of two plots: (A) An overview of all existing missingness patterns in the data frame, (B) a frequency table representing how often the particular missingness patterns can be found in the data frame. 
 #' @examples
-#' d <- mtcars
+#' d <- psych::bfi
 #' d[4,3:4] <- NA # Create missing to illustrate function
 #' 
 #' missing_pattern_plot(d)
@@ -30,24 +30,23 @@ missing_pattern_plot <- function(data,
                                  nrow = 1){
   
   # dependencies
-  library(mice)
-  library(tidyverse)
+  library(mice)       
+  library(tidyverse)  
   library(gridExtra)
-  library(cowplot)
+  library(cowplot)    
   
   # Break message
-  if (is.null(data)) {
+  if (is.null(data)) {l
     message("You need to provide a data frame!")
   }
   
   color_2 <- colors[2]
   
   temp <- data %>% 
-    mice::md.pattern(plot = FALSE) %>% 
-    as.data.frame %>%
-    tibble::rownames_to_column("sum") %>% 
+    mice::md.pattern(plot = FALSE) %>%
+    data.frame(sum = row.names(.), .) %>%
+    tbl_df %>%
     dplyr::select(-ncol(.)) %>%
-    as_tibble %>%
     subset(sum != "") %>%
     dplyr::mutate(sum = as.numeric(sum)) %>%
     dplyr::mutate(n = 1:nrow(.)) %>%
