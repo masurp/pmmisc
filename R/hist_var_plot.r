@@ -106,7 +106,10 @@ hist_var_plot <- function(data,
         
       } else {
         
-        grid <- with(data_long, seq(min(value), max(value), length = 100))
+        grid <- with(data_long, 
+                     seq(min(value, na.rm = TRUE), 
+                         max(value, na.rm = TRUE), 
+                         length = 100))
         normaldens <- ddply(data_long, "key", function(df) {
           data.frame( 
             value = grid,
