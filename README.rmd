@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/specr)](https://CRAN.R-project.org/package=specr)
+[![CRAN status](https://www.r-pkg.org/badges/version/pmmisc)](https://CRAN.R-project.org/package=pmmisc)
 <!-- badges: end -->
 
 This package includes some custom-made functions to facilitate some common data wrangling procedures as well as common computations in descriptive analyses. Please note that most functions are highly costumized to my own workflow. They may hence break in more general frameworks or when used in a different way...

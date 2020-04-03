@@ -8,7 +8,7 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/specr)](https://CRAN.R-project.org/package=specr)
+status](https://www.r-pkg.org/badges/version/pmmisc)](https://CRAN.R-project.org/package=pmmisc)
 <!-- badges: end -->
 
 This package includes some custom-made functions to facilitate some
