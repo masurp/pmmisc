@@ -60,7 +60,8 @@ socdem_table <- function(age,
     mutate(percent = printnum(percent))
   
   temp <- bind_rows(tab_age, tab_gen, tab_edu) %>%
-    select(variable, frequency, percent)
+    select(variable, frequency, percent) %>%
+    mutate(frequency = as.character(frequency))
   
   temp[is.na(temp)] <- ""
   
