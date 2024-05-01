@@ -36,7 +36,7 @@ describe_vars <- function(data,
     describe(., ...) %>%
     as.data.frame %>%
     rownames_to_column(first_col) %>%
-    as.tibble
+    as_tibble
   
   if (!is.null(items)) {
     items$code <- as.character(items$code)

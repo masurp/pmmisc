@@ -45,7 +45,7 @@ missing_pattern_plot <- function(data,
   temp <- data %>% 
     mice::md.pattern(plot = FALSE) %>%
     data.frame(sum = row.names(.), .) %>%
-    tbl_df %>%
+    as_tibble %>%
     dplyr::select(-ncol(.)) %>%
     subset(sum != "") %>%
     dplyr::mutate(sum = as.numeric(sum)) %>%

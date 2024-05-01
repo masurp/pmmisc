@@ -48,13 +48,13 @@ describe_factor <- function(x,
     
     temp <- x %>%
       table(., ...) %>%
-      as.tibble %>%
+      as_tibble %>%
       set_colnames(c("x", "n"))
     
     temp2 <- x %>%
       table(., ...) %>%
       prop.table %>% 
-      as.tibble %>%
+      as_tibble %>%
       set_colnames(c("x", "percent")) %>%
       mutate(percent = percent*100) %>%
       select(x, percent)

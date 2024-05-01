@@ -42,7 +42,7 @@ sample_sizes <- function(...,
     sample,
     n = unlist(list(...))
     ) %>%
-    as.tibble %>%
+    as_tibble %>%
     mutate(n = as.numeric(n),
            percent = (n/unlist(list(...))[[1]])*100)
   
